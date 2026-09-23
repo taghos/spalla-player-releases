@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spalla Player — HTML puro</title>
+    <link rel="stylesheet" href="./app.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Spalla Player</h1>
+      <span id="versao" class="versao"></span>
+    </header>
+
+    <div id="player" class="palco"></div>
+
+    <div class="barra">
+      <button id="tocar" type="button">Tocar/Pausar</button>
+      <button id="mudo" type="button">Mudo</button>
+      <span id="estado" class="estado"></span>
+    </div>
+
+    <!-- Em produção, troque por spalla-player.min.js do tarball da release. -->
+    <script src="./spalla-player.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

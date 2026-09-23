@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Spalla Player · Tizen</title>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="app__lista" id="lista" aria-label="Conteúdos">
+        <h1 class="app__titulo">Spalla Player</h1>
+        <ul class="app__itens" id="itens"></ul>
+        <p class="app__dica">
+          Setas navegam · OK abre · RETURN volta
+          <span class="app__versao" id="versao"></span>
+        </p>
+      </section>
+
+      <section class="app__player hidden" id="palco">
+        <div id="player"></div>
+        <!-- Teclas que a TV suporta, quais foram registradas e a última
+             apertada: é como se mapeia o controle sem depurador remoto. -->
+        <div class="app__diagnostico" id="diagnostico"></div>
+      </section>
+    </main>
+
+    <!-- API de TV do Tizen; ausente no navegador, o app cai para o teclado. -->
+    <script src="$WEBAPIS/webapis/webapis.js"></script>
+    <script src="spalla-player.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

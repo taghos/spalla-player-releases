@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="http://spalla.io/player" version="1.0.0" viewmodes="maximized">
+    <tizen:application id="SpallaPlyr.Player" package="SpallaPlyr" required_version="5.0"/>
+    <content src="index.html"/>
+    <feature name="http://tizen.org/feature/screen.size.normal.1080.1920"/>
+    <icon src="icon.png"/>
+    <name>Spalla Player</name>
+    <tizen:profile name="tv-samsung"/>
+    <!-- O player busca configuração e mídia em domínios da Spalla e das CDNs. -->
+    <access origin="*" subdomains="true"/>
+    <tizen:privilege name="http://tizen.org/privilege/internet"/>
+    <!-- Sem isto o aparelho apaga a tela durante a reprodução. -->
+    <tizen:privilege name="http://tizen.org/privilege/display"/>
+    <!-- Sem isto `registerKey` lança, e a TV continua dona das teclas de mídia:
+         apertar play só abre o painel do próprio televisor. -->
+    <tizen:privilege name="http://tizen.org/privilege/tv.inputdevice"/>
+    <tizen:setting screen-orientation="landscape" context-menu="disable" background-support="disable" encryption="disable" install-location="auto" hwkey-event="enable"/>
+    <tizen:allow-navigation>*</tizen:allow-navigation>
+</widget>

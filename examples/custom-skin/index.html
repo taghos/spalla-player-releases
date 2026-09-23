@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spalla Player — skin própria</title>
+    <link rel="stylesheet" href="./app.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Skin própria</h1>
+      <span id="versao" class="versao"></span>
+    </header>
+
+    <div id="player" class="palco"></div>
+
+    <div class="barra">
+      <label for="skin">Skin</label>
+      <select id="skin"></select>
+      <button id="abrir" type="button">Recarregar</button>
+      <span id="estado" class="estado"></span>
+    </div>
+
+    <!-- O player primeiro: a skin estende `SpallaPlayer.Skin` no momento em que
+         o arquivo é avaliado, e registra-se antes de qualquer instância. -->
+    <script src="./spalla-player.js"></script>
+    <script src="./minha-skin.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

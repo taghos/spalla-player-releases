@@ -1,0 +1,105 @@
+/* A TV renderiza em 1920x1080 lógicos e é assistida a três metros. */
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background: #0b0d10;
+  color: #fff;
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  overflow: hidden;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.app,
+.app__player {
+  width: 100%;
+  height: 100%;
+}
+
+.app__player {
+  position: relative;
+}
+
+/* Fica por cima do player, no canto, só enquanto se mapeia o controle. */
+.app__diagnostico {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  right: 12px;
+  z-index: 10;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #8ab4ff;
+  font-size: 20px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.app__diagnostico #tecla {
+  color: #ffd479;
+}
+
+.app__lista {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 64px 96px;
+}
+
+.app__titulo {
+  margin: 0 0 32px;
+  font-size: 48px;
+  font-weight: 600;
+}
+
+.app__itens {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.app__item {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 20px 24px;
+  border: 0;
+  border-radius: 8px;
+  background: rgb(255 255 255 / 6%);
+  color: #fff;
+  font: inherit;
+  font-size: 28px;
+  text-align: start;
+  cursor: pointer;
+}
+
+/* O foco é a única pista de posição no controle remoto. */
+.app__item--focado {
+  background: #3699ff;
+  outline: 4px solid rgb(54 153 255 / 40%);
+}
+
+.app__item:focus {
+  outline-offset: 2px;
+}
+
+.app__dica {
+  margin-top: 40px;
+  font-size: 22px;
+  opacity: 0.55;
+}
+
+.app__versao {
+  opacity: 0.7;
+}
+
+/* O player ocupa a tela inteira; a área de segurança fica por conta dele. */
+#player {
+  width: 100%;
+  height: 100%;
+}

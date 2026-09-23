@@ -1,0 +1,19 @@
+{
+  "id": "io.spalla.player",
+  "version": "1.0.0",
+  "vendor": "Spalla",
+  "type": "web",
+  "main": "index.html",
+  "title": "Spalla Player",
+  "icon": "icon.png",
+  "resolution": "1920x1080",
+  "disableBackHistoryAPI": true,
+  "requiredACG": [
+    "deviceinfo.query",
+    "systemconfig.query",
+    "settings.query",
+    "arc.query",
+    "externalinput.query",
+    "profile.query"
+  ]
+}
