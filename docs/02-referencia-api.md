@@ -221,6 +221,37 @@ player.setControls([]); // volta ao padrão da skin/dispositivo
 player.setControls(false); // mantém a barra oculta
 ```
 
+#### Lista de controles suportados
+
+Nomes aceitos em `controls` (opção do construtor) e em `setControls(nomes)`:
+
+| Nome                                               | O que é                                    |
+| -------------------------------------------------- | ------------------------------------------ |
+| `play_pause` · `play_pause_buffering`              | Tocar e pausar; a segunda mostra o spinner |
+| `rewind_10` · `forward_10`                         | Saltam dez segundos na linha do tempo      |
+| `rewind` · `fast_forward`                          | Aceleram a reprodução, sem saltar          |
+| `skip_previous` · `skip_next`                      | Item anterior e próximo da playlist        |
+| `skip_previous_always` · `skip_next_always`        | Os mesmos, sempre visíveis                 |
+| `time_and_duration`                                | Tempo decorrido e duração                  |
+| `spacer`                                           | Espaço elástico, empurra o resto à direita |
+| `mute` · `volume` · `mute_volume`                  | Áudio; `mute_volume` junta os dois         |
+| `captions` · `captions-position` · `captions-size` | Legenda, posição e tamanho                 |
+| `language` · `video_type`                          | Faixa de áudio e tipo de vídeo             |
+| `quality` · `playback_rate`                        | Qualidade e velocidade                     |
+| `chapter` · `queue`                                | Capítulos e fila                           |
+| `loop` · `picture_in_picture`                      | Repetição e janela flutuante               |
+| `cast` · `remote`                                  | Chromecast e Remote Playback (AirPlay)     |
+| `fullscreen` · `overflow_menu` · `content_title`   | Tela cheia, menu "mais" e título           |
+
+Mais os botões dos plugins ativos, quando existirem: `ai`, `audio_description`,
+`comments`, `libras`, `like`, `playlist`, `statistics`, `voice`. Um nome
+desconhecido é ignorado, com aviso no console — não interrompe a montagem da
+barra.
+
+Um botão de plugin próprio (`addControlButton`) entra onde a skin ativa citar
+o token `plugins` dentro da lista de controles (ver
+[skins personalizadas](04-skins-personalizadas.md)).
+
 ### Publicidade e cast
 
 | Método                     | O que faz                                                       | Exemplo / retorno                            |
