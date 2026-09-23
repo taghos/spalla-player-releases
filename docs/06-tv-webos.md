@@ -59,6 +59,23 @@ navegação por controle remoto (não há como usar mouse ali).
 new SpallaPlayer("#player", { deviceClass: "tv" });
 ```
 
+## `isApp`
+
+Controla se a skin automática de TV entra sozinha. O player já detecta
+sozinho quando roda dentro do app empacotado (a WebAPI do webOS só existe
+ali), então normalmente você não precisa passar nada. Se o seu app rodar numa
+WebView sem essa WebAPI, ou se quiser testar num navegador comum antes de
+empacotar, force explicitamente:
+
+```js
+new SpallaPlayer("#player", { deviceClass: "tv", isApp: true });
+```
+
+Sem essa opção (e sem a WebAPI), o player assume que está no navegador da
+própria TV e usa a skin padrão em vez da automática de TV — mesmo com
+`deviceClass: 'tv'` já forçado. Não há parâmetro de URL equivalente, de
+propósito: uma página de terceiro não pode forjar "sou um app".
+
 ## Empacotamento
 
 Requer o [webOS TV CLI](https://webostv.developer.lge.com/develop/tools/cli-installation):

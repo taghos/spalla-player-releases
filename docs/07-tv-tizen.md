@@ -67,6 +67,14 @@ tratamento por teclado normal.
 Mesma recomendação do guia de webOS: passe explicitamente, não deixe para a
 heurística automática.
 
+## `isApp`
+
+Mesma regra do guia de webOS: a WebAPI do Tizen (`window.tizen`) só existe
+dentro do app empacotado, e o player usa isso para decidir sozinho se a skin
+automática de TV entra. Passe `isApp: true` explicitamente só se estiver
+testando num navegador comum ou rodando numa WebView sem essa WebAPI — veja
+[o mesmo tópico no guia de webOS](06-tv-webos.md#isapp).
+
 ## Empacotamento
 
 Requer o [Tizen Studio](https://developer.tizen.org/development/tizen-studio/download)

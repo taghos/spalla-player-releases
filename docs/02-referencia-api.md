@@ -49,6 +49,7 @@ const player = new SpallaPlayer("#player", {
   skin: "videojs", // ver docs/04-skins-personalizadas.md
   showSeekButtons: undefined, // botões de salto de dez segundos
   deviceClass: undefined, // tv | mobile | desktop; só para testes manuais
+  isApp: undefined, // roda dentro de app de TV; ver docs/06-tv-webos.md e docs/07-tv-tizen.md
   cast: { receiverAppId: "3C6B9439" },
   features: { ai: true }, // liga ou desliga plugins específicos
   allowUrlParams: false, // ver docs/03-parametros-de-url.md
@@ -72,6 +73,7 @@ Campo omitido preserva o que o backend configurou (ou o padrão do recurso);
 | `playbackSpeeds`          | `number[] \| string` | Velocidades do menu (positivas, até 16); string separada por vírgulas |
 | `controls`                | `string[] \| false`  | Lista de controles da barra; `false` oculta e `[]` restaura o padrão  |
 | `cast`                    | `boolean \| object`  | Chromecast/AirPlay; aceita `{ receiverAppId, enabled }`               |
+| `isApp`                   | `boolean`            | App de TV empacotado; sem isso a skin automática de TV não entra     |
 
 ### Fontes de conteúdo
 
