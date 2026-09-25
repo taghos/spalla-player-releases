@@ -1,4 +1,4 @@
-/*
+typeof globalThis==='undefined'&&typeof self!=='undefined'&&(self.globalThis=self);typeof Map!=='undefined'&&typeof Map.prototype.getOrInsert!=='function'&&Object.defineProperty(Map.prototype,'getOrInsert',{configurable:true,writable:true,value:function(key,value){if(this.has(key))return this.get(key);this.set(key,value);return value}});typeof Map!=='undefined'&&typeof Map.prototype.getOrInsertComputed!=='function'&&Object.defineProperty(Map.prototype,'getOrInsertComputed',{configurable:true,writable:true,value:function(key,factory){if(this.has(key))return this.get(key);var value=factory(key);this.set(key,value);return value}});/*
 
  Copyright The Closure Library Authors.
  SPDX-License-Identifier: Apache-2.0
