@@ -73,7 +73,39 @@ Campo omitido preserva o que o backend configurou (ou o padrão do recurso);
 | `playbackSpeeds`          | `number[] \| string` | Velocidades do menu (positivas, até 16); string separada por vírgulas |
 | `controls`                | `string[] \| false`  | Lista de controles da barra; `false` oculta e `[]` restaura o padrão  |
 | `cast`                    | `boolean \| object`  | Chromecast/AirPlay; aceita `{ receiverAppId, enabled }`               |
-| `isApp`                   | `boolean`            | App de TV empacotado; sem isso a skin automática de TV não entra     |
+| `isApp`                   | `boolean`            | App de TV empacotado; sem isso a skin automática de TV não entra      |
+
+### Recuperação automática de rede
+
+Nas versões que incluem `autoRetry`, falhas transitórias de rede recebem três
+retentativas extras após 2, 4 e 8 segundos. São retentativas de carga, além das
+tentativas internas de cada requisição; a espera começa após a falha anterior.
+
+```js
+const player = new SpallaPlayer("#player", {
+  autoRetry: {
+    maxRetries: 3,
+    baseDelay: 2000,
+    backoffFactor: 2,
+    maxDelay: 30000,
+  },
+});
+```
+
+Omitir a opção ou passar `true` usa esses padrões. `autoRetry: false` ou
+`maxRetries: 0` desliga o automático. Os atrasos são em milissegundos;
+valores inválidos usam os padrões. O limite é inteiro não negativo, o fator
+é pelo menos 1 e os atrasos são positivos. Não há parâmetro de URL equivalente.
+
+Somente falhas transitórias de transporte são elegíveis, inclusive durante
+autorização e configuração. HTTP 401/403/404, bloqueios de acesso, mídia
+inválida, DRM e erros de publicidade não são repetidos automaticamente.
+
+VOD conserva a posição e a intenção de reprodução; live retorna à posição
+ao vivo. `load()`, `stop()`, `unload()` e `destroy()` cancelam a recuperação
+anterior. `retry()` antecipa uma espera e abre outro orçamento, sem criar
+cargas concorrentes. O limite automático só renova após 30 segundos de
+reprodução estável, sem pausa, buffering ou anúncio, ou por nova carga explícita.
 
 ### Fontes de conteúdo
 

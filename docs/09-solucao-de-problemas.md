@@ -1,5 +1,19 @@
 # Solução de problemas
 
+## Localizador e horário do erro
+
+Nas versões com diagnóstico de sessão na tela de erro, envie ao suporte o
+**localizador**, a data/hora em **UTC** e o código técnico exibidos. O
+localizador é selecionável e corresponde a `player.getViewId()`; não é o
+UID persistente retornado por `getSessionId()`. Ele permanece igual nas
+retentativas. A data/hora usa o relógio do dispositivo, mesmo quando a falha
+ocorre antes de autorizar a sessão.
+
+Durante uma falha transitória de rede, a tela informa a próxima retentativa.
+Ao esgotar o limite, **Tentar novamente** inicia outro ciclo. A política pode
+ser desligada ou ajustada por `autoRetry` no construtor, conforme a
+[referência da API](02-referencia-api.md#recuperação-automática-de-rede).
+
 ## Autoplay com som nunca começa
 
 **Sintoma**: `autoplay: true` sem `muted`, e o vídeo fica carregado mas
