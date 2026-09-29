@@ -36,6 +36,12 @@ de passá-la como `undefined` explicitamente dentro de um objeto.
 `debug=1` liga logs detalhados e `debug=0` os silencia; também são aceitos
 `silent`, `error`, `warn`, `info` e `debug`.
 
+Nas versões com AutoPiP, `autoPipViewport=1|0` e `autoPipBlur=1|0` controlam
+separadamente miniplayer ao rolar e PiP nativo ao perder foco. Ambos são opt-in;
+o construtor vence esses valores. Os parâmetros são reconhecidos no embed, mas
+os modos automáticos ficam inativos dentro de iframe. Consulte as
+[condições e permissões](02-referencia-api.md#miniplayer-e-pip-automático).
+
 Exemplos:
 
 ```

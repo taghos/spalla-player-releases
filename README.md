@@ -33,6 +33,11 @@ Guia completo para integradores em [`docs/`](docs/), começando pelo
 
 ## Exemplos
 
+As próximas versões com `autoPipViewport` e `autoPipBlur` oferecem miniplayer
+ao rolar e PiP automático onde permitido pelo navegador. Ambos são opt-in;
+consulte [a referência](docs/02-referencia-api.md#miniplayer-e-pip-automático)
+para configuração e limitações, inclusive em iframe.
+
 | Exemplo                                          | O que mostra                               |
 | ------------------------------------------------ | ------------------------------------------ |
 | [`examples/html/`](examples/html/)               | HTML puro, sem framework — comece por aqui |

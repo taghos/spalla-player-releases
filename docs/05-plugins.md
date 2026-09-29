@@ -7,6 +7,14 @@ registrar o seu do mesmo jeito.
 
 ## Ciclo de vida
 
+O plugin embarcado `auto-pip` monta cedo e acompanha trocas de conteúdo,
+inclusive URL direta. `features: { "auto-pip": false }` desativa os dois
+gatilhos automáticos. Consulte [as opções e limitações](02-referencia-api.md#miniplayer-e-pip-automático).
+
+Enquanto Document PiP hospeda a raiz, não a reposicione em outro plugin. O
+`auto-pip` suspende suas movimentações e aguarda a devolução da raiz ao fechar
+a janela antes de retomar o miniplayer.
+
 1. O player decide, via `shouldMount(context)`, se aquele plugin deve existir
    para o conteúdo atual (por exemplo, só em VOD, ou só quando uma opção foi
    ligada).

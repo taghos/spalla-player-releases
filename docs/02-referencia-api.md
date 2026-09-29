@@ -75,6 +75,50 @@ Campo omitido preserva o que o backend configurou (ou o padrão do recurso);
 | `cast`                    | `boolean \| object`  | Chromecast/AirPlay; aceita `{ receiverAppId, enabled }`               |
 | `isApp`                   | `boolean`            | App de TV empacotado; sem isso a skin automática de TV não entra      |
 
+### Miniplayer e PiP automático
+
+Nas versões que incluem essas opções, os dois gatilhos são independentes e
+desligados por padrão:
+
+```js
+const player = new SpallaPlayer("#player", {
+  autoPipViewport: true,
+  autoPipBlur: true,
+});
+```
+
+`autoPipViewport` mostra o player no canto inferior direito quando sua caixa
+sai totalmente do viewport. Preserva vídeo e skin, com largura máxima de 320px
+adaptada à janela. Voltar à caixa original restaura a posição. Fechar impede
+reabertura até a caixa voltar ao viewport e sair novamente. Pausar depois de
+abrir mantém o miniplayer; conteúdo já pausado não abre automaticamente.
+
+`autoPipBlur` solicita PiP nativo ao perder foco e integra a ação automática
+da Media Session. Não é garantia de abertura: suporte e permissão são exigidos.
+No Chrome desktop, a mídia deve estar na página principal, tocando e audível
+recentemente, com os critérios de permissão/engajamento do navegador atendidos.
+Uma recusa não interrompe o vídeo. Ao retornar ao foco, fecha apenas o PiP aberto
+pela automação; PiP manual é preservado. Fechamento manual do PiP automático
+suprime novas tentativas até retornar à página.
+
+Autoplay permanece independente. `pip: false` ou
+`features: { "auto-pip": false }` desativam ambos. TVs, áudio-only, Cast,
+fullscreen e anúncios de cliente pendentes/ativos bloqueiam ativação. Anúncios
+costurados no vídeo (DAI) podem continuar. A última instância que começou a tocar
+tem prioridade entre vários players. Fim, troca de conteúdo e destruição
+restauram os modos automáticos.
+
+Flags do backend: `sp_player_auto_pip_viewport` e `sp_player_auto_pip_blur`,
+aplicadas por conteúdo. Construtor vence URL, que vence as flags; `false`
+explícito desliga. URL: `?autoPipViewport=1&autoPipBlur=1`, com
+`allowUrlParams: true`, já habilitado no embed.
+
+Dentro de iframe, os modos automáticos ficam inativos: não podem flutuar fora
+dele e o mecanismo automático do Chrome exige mídia no frame principal.
+Reposicionar o iframe inteiro exige integração no site hospedeiro, não fornecida
+pelo player. PiP manual continua onde suportado. Sem `IntersectionObserver`,
+somente a ativação por viewport fica indisponível.
+
 ### Recuperação automática de rede
 
 Nas versões que incluem `autoRetry`, falhas transitórias de rede recebem três
