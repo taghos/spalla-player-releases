@@ -7,17 +7,18 @@ Este repositório guarda só a versão mais recente na raiz; o histórico
 completo fica nas [tags](https://github.com/taghos/spalla-player-releases/tags)
 e na [página de releases](https://github.com/taghos/spalla-player-releases/releases).
 
-## [1.0.5] — 2026-09-28
+## [1.0.6] — 2026-09-29
 
 ### Added
 
-- Mensagens de erro exibem o localizador da visualização em destaque,
-  selecionável, acompanhado da data e hora da ocorrência em UTC.
-- Recuperação automática de falhas transitórias de rede, com três
-  retentativas extras após 2, 4 e 8 segundos, contagem na tela e limite
-  configurável pela opção `autoRetry` do construtor.
+- Miniplayer opcional quando o vídeo sai do viewport (`autoPipViewport`) e
+  PiP nativo ao perder foco (`autoPipBlur`), sujeito ao suporte e às permissões
+  do navegador. Gatilhos independentes, desligados por padrão, configuráveis
+  por construtor, URL e flags do backend, com retorno automático sem fechar
+  PiP aberto manualmente. Modos automáticos não atuam dentro de iframe.
 
 ### Fixed
 
-- Os controles da skin `vibranium` permanecem agrupados nas pontas em players
-  estreitos, sem espaços excessivos entre os botões.
+- Abrir PiP pelo menu enquanto o miniplayer está flutuando preserva a
+  reprodução e o retorno à página, sem disputar a posição do vídeo entre
+  as duas janelas.
