@@ -159,6 +159,7 @@ novos no mesmo `player.on(...)`:
 | `volumechange`                    | `volume`                                    |
 | `adstarted`                       | `adbegin`                                   |
 | `adended`                         | `adend`                                     |
+| `aderror`                         | `adserror`                                  |
 | `fullscreenchange`                | `fullscreen`                                |
 | `controlsshown`                   | `showControls`                              |
 | `controlshidden`                  | `hideControls`                              |
