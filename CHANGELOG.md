@@ -7,10 +7,9 @@ Este repositório guarda só a versão mais recente na raiz; o histórico
 completo fica nas [tags](https://github.com/taghos/spalla-player-releases/tags)
 e na [página de releases](https://github.com/taghos/spalla-player-releases/releases).
 
-## [1.0.8] — 2026-09-30
+## [1.0.9] — 2026-09-30
 
-### Changed
+### Fixed
 
-- Vídeo ainda em processamento deixa de cair na tela de erro: o player mostra
-  um banner "Vídeo em processamento" sobre a imagem de capa do conteúdo, como
-  fazia o player anterior.
+- O campo `view_start` da telemetria passa a ser enviado como epoch inteiro,
+  sem a fração introduzida pela sincronização do relógio.
