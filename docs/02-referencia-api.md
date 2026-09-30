@@ -67,7 +67,7 @@ Campo omitido preserva o que o backend configurou (ou o padrão do recurso);
 | `showSeekButtons`         | `boolean`            | Botões de avanço/retrocesso de dez segundos, quando há linha do tempo |
 | `subtitles`               | `boolean`            | Exibição inicial de legendas externas                                 |
 | `enableCc`                | `boolean`            | Seleção inicial de legenda embutida (CC), separada da externa         |
-| `subtitleLanguage`        | `string`             | Idioma preferido de legenda (`pt-br`, `en-US`, ...)                   |
+| `subtitleLanguage`        | `string \| null`     | Idioma preferido de legenda (`pt-br`, `en-US`, ...); `null` começa sem legenda |
 | `subtitlePosition`        | `'inner' \| 'outer'` | Legenda sobre o vídeo ou numa faixa reservada abaixo dele             |
 | `showInfo`                | `boolean`            | Painel de estatísticas de transmissão                                 |
 | `playbackSpeeds`          | `number[] \| string` | Velocidades do menu (positivas, até 16); string separada por vírgulas |
@@ -392,7 +392,8 @@ player.on("*", (event, metadata) => {
 O `aderror` traz `code` e `message` do erro de anúncio. O `daifallback` avisa
 que o intervalo comercial costurado ao vídeo não veio e a reprodução seguiu
 pelo conteúdo normal, com o motivo em `reason` (`sdk_ausente` ou
-`stream_error`).
+`stream_error`). O `error` só é emitido quando a reprodução para: falha que o
+player recupera sozinho não chega a quem escuta.
 
 ## Chromecast
 
