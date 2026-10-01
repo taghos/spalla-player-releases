@@ -7,9 +7,11 @@ Este repositório guarda só a versão mais recente na raiz; o histórico
 completo fica nas [tags](https://github.com/taghos/spalla-player-releases/tags)
 e na [página de releases](https://github.com/taghos/spalla-player-releases/releases).
 
-## [1.0.9] — 2026-09-30
+## [1.0.10] — 2026-10-01
 
 ### Fixed
 
-- O campo `view_start` da telemetria passa a ser enviado como epoch inteiro,
-  sem a fração introduzida pela sincronização do relógio.
+- As coletas de telemetria passam a carregar o schema base completo desde o
+  primeiro evento, com timestamps UTC sincronizados pelo servidor e detalhes
+  técnicos de erro sanitizados, sem expor credenciais. O `view_id` volta a ser
+  um UUID, sem timestamp concatenado.
