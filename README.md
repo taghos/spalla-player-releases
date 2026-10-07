@@ -44,6 +44,7 @@ para configuração e limitações, inclusive em iframe.
 | [`examples/webos/`](examples/webos/)             | Aplicativo para TVs LG (webOS)             |
 | [`examples/tizen/`](examples/tizen/)             | Aplicativo para TVs Samsung (Tizen)        |
 | [`examples/react/`](examples/react/)             | Integração com Next.js (React)             |
+| [`examples/react-cdn/`](examples/react-cdn/)     | Next.js (React) com JavaScript via CDN     |
 | [`examples/custom-skin/`](examples/custom-skin/) | Skin própria, registrada em runtime        |
 
 Cada pasta tem seu próprio `README.md` com instruções específicas.

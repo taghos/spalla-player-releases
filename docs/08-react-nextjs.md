@@ -4,6 +4,10 @@ Veja também o exemplo completo em [`examples/react/`](../examples/react/), com
 quatro telas cobrindo controles completos, overlay personalizado, várias
 instâncias na mesma página e skin registrada em runtime.
 
+A variante [`examples/react-cdn/`](../examples/react-cdn/) traz as mesmas
+quatro telas, carregando o JavaScript diretamente do CDN da Spalla, sem
+bundle em `public/vendor/` nem compilação do player.
+
 ## O player é global, não um pacote npm
 
 O Spalla Player é distribuído como um bundle único, carregado por `<script>`
@@ -92,3 +96,18 @@ como no exemplo) dentro de `public/vendor/` do seu projeto Next.js, junto com
 `spalla.wasm`. Arquivos em `public/` são servidos como estáticos pelo Next,
 então `/vendor/spalla-player.js` no `<Script src="...">` encontra o arquivo
 sem configuração adicional.
+
+Para usar o CDN, como na variante `react-cdn`, basta trocar o `src` no layout
+raiz, preservando a estratégia de carregamento:
+
+```jsx
+<Script
+  src="https://beyond.spalla.io/player/spalla-player.min.js"
+  strategy="beforeInteractive"
+/>
+```
+
+Essa URL serve sempre a última versão publicada, sem fixar versão. O player
+localiza os arquivos auxiliares ao lado do script no CDN; não é preciso
+copiá-los para o projeto Next.js. Para decidir quando atualizar, prefira o
+bundle local de uma release específica.

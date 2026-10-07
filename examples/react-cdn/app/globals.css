@@ -1,0 +1,262 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: #0e0f13;
+  color: #e8e8ec;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+}
+
+/* `:not(.sp-player *)` evita vazar para links e botões que o próprio player
+   desenha dentro da própria raiz (`.sp-player`), como o da marca-d'água. */
+a:not(.sp-player *) {
+  color: #7ee3ff;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 14px 24px;
+  background: #16181f;
+  border-bottom: 1px solid #262933;
+}
+
+.nav-bar__brand {
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.nav-bar__links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-bar__links a {
+  text-decoration: none;
+  color: #cfd3dc;
+  font-size: 14px;
+}
+
+.nav-bar__links a:hover {
+  color: #7ee3ff;
+}
+
+.app-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.home-card {
+  padding: 20px;
+  border-radius: 10px;
+  background: #181a22;
+  border: 1px solid #262933;
+}
+
+.home-card h2 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.home-card p {
+  color: #a7abb6;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.screen-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.content-select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #1d2029;
+  color: #e8e8ec;
+  border: 1px solid #333846;
+}
+
+button:not(.sp-player *) {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #333846;
+  background: #232733;
+  color: #e8e8ec;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+button:not(.sp-player *):hover {
+  background: #2b303e;
+}
+
+.player-stage {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.player-stage-wrap {
+  position: relative;
+}
+
+/* Painel de controles ------------------------------------------------ */
+
+.control-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.control-panel details {
+  background: #161821;
+  border: 1px solid #262933;
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.control-panel summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+.control-row label {
+  font-size: 13px;
+  color: #a7abb6;
+}
+
+.control-row input[type='text'],
+.control-row input[type='number'],
+.control-row select {
+  padding: 5px 8px;
+  border-radius: 6px;
+  background: #1d2029;
+  color: #e8e8ec;
+  border: 1px solid #333846;
+}
+
+.control-panel pre {
+  max-height: 240px;
+  overflow: auto;
+  background: #0b0c10;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.badge-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+
+.badge {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #232733;
+  border: 1px solid #333846;
+}
+
+/* Tela de overlay ------------------------------------------------------ */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent 40%);
+}
+
+.overlay__center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay__center button {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  font-size: 20px;
+}
+
+.overlay__bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+}
+
+.overlay__bar input[type='range'] {
+  flex: 1;
+}
+
+.overlay__time {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  min-width: 90px;
+  text-align: center;
+}
+
+/* Vários players --------------------------------------------------- */
+
+.player-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.player-card {
+  background: #161821;
+  border: 1px solid #262933;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.player-card__status {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #a7abb6;
+}
