@@ -17,6 +17,15 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.0.15] — 2026-10-07
+
+MINOR
+
+### Changed
+
+- MINOR — Otimizações internas de performance na entrega de vídeo, sem
+  mudança de API nem de comportamento visível.
+
 ## [1.0.14] — 2026-10-06
 
 BUG/MINOR
