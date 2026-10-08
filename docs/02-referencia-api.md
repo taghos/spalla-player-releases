@@ -1,5 +1,26 @@
 # Referência da API
 
+## Vídeos 360 graus
+
+Conteúdos marcados como `sp_video_360` no backend ativam projeção
+equiretangular e navegador circular com quatro direções. É possível arrastar
+com mouse/toque, usar WASD e ampliar com roda ou pinça.
+
+O botão `cardboard` oferece tela dividida para visores simples, não WebXR
+imersivo. Nas skins embarcadas entra automaticamente com os plugins; inclua
+esse nome se informar uma lista personalizada de controles. A orientação por
+sensores depende do gesto e da autorização do navegador; sem ela, use o toque.
+
+Durante anúncios a projeção é suspensa e volta com direção e zoom preservados,
+em vista única. O miniplayer por rolagem continua funcionando, exceto em
+Cardboard. PiP, Cast, AirPlay e fullscreen exclusivo do vídeo (iPhone) ficam
+bloqueados nesses conteúdos; fullscreen por container permanece disponível.
+Sem WebGL ou com DRM há aviso e reprodução plana. TVs exibem vídeo plano,
+sem navegação por D-pad nesta etapa.
+
+`features: { "video-360": false }` desativa projeção e navegador. Fontes por
+URL direta não deduzem 360 graus; a ativação depende da configuração do conteúdo.
+
 ## Construtor
 
 ```js

@@ -7,6 +7,13 @@ registrar o seu do mesmo jeito.
 
 ## Ciclo de vida
 
+O plugin embarcado `video-360` monta para `config.video360` (`sp_video_360`
+do backend), fora de TV e modo áudio. Pode ser desligado com
+`features: { "video-360": false }`. Ele libera gestos, sensores e animação ao
+iniciar outra carga, mesmo se ela falhar. Não mova o canvas separado da raiz:
+fullscreen e miniplayer precisam hospedar a composição completa.
+Consulte [as limitações de vídeo 360](02-referencia-api.md#vídeos-360-graus).
+
 O plugin embarcado `auto-pip` monta cedo e acompanha trocas de conteúdo,
 inclusive URL direta. `features: { "auto-pip": false }` desativa os dois
 gatilhos automáticos. Consulte [as opções e limitações](02-referencia-api.md#miniplayer-e-pip-automático).
