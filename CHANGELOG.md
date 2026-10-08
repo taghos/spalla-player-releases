@@ -17,6 +17,17 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.0] — 2026-10-08
+
+MEDIUM
+
+### Added
+
+- MEDIUM — Vídeos marcados como 360 graus passam a ter projeção esférica,
+  navegador direcional, arraste, zoom e modo de tela dividida para Cardboard.
+  PiP, Cast, AirPlay e fullscreen exclusivo do vídeo ficam indisponíveis nesses
+  conteúdos; dispositivos sem WebGL mantêm a reprodução plana com aviso.
+
 ## [1.0.19] — 2026-10-08
 
 BUG/MEDIUM
