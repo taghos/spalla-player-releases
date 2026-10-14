@@ -17,6 +17,15 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.2] — 2026-10-14
+
+BUG/MINOR
+
+### Fixed
+
+- BUG/MINOR — Erros recuperáveis deixam de gerar eventos de erro na telemetria,
+  inclusive durante a inicialização. Falhas fatais continuam sendo enviadas.
+
 ## [1.1.1] — 2026-10-14
 
 MINOR
