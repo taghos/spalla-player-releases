@@ -17,6 +17,17 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.5] — 2026-10-15
+
+BUG/MINOR
+
+### Fixed
+
+- BUG/MINOR — O parâmetro `info=1` no embed mostrava o painel de estatísticas
+  legado, com o vocabulário dele e sem CDN, sinal nem latência, no
+  lugar do painel do player. O nome `statistics` só entra nos menus com o
+  botão do plugin registrado.
+
 ## [1.1.4] — 2026-10-14
 
 MINOR
