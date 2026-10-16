@@ -68,6 +68,8 @@ const player = new SpallaPlayer("#player", {
   telemetry: true,
   ads: true,
   skin: "videojs", // ver docs/04-skins-personalizadas.md
+  vodBufferingGoal: undefined, // alvo do buffer de VOD em segundos; omitido usa o perfil
+  p2pVodDownloadTimeWindow: 60, // segundos de pré-download do VOD com P2P ativo
   showSeekButtons: undefined, // botões de salto de dez segundos
   deviceClass: undefined, // tv | mobile | desktop; só para testes manuais
   isApp: undefined, // roda dentro de app de TV; ver docs/06-tv-webos.md e docs/07-tv-tizen.md
@@ -80,21 +82,34 @@ const player = new SpallaPlayer("#player", {
 Campo omitido preserva o que o backend configurou (ou o padrão do recurso);
 `false` e `0` são valores explícitos, não ausência.
 
-| Opção                     | Tipo                 | Efeito                                                                |
-| ------------------------- | -------------------- | --------------------------------------------------------------------- |
-| `autoplay`/`muted`/`loop` | `boolean`            | Estado inicial de reprodução                                          |
-| `startTime`               | `number`             | Segundos iniciais do primeiro VOD; ignorado em conteúdo ao vivo       |
-| `resume`                  | `boolean`            | Retoma de onde parou (backend + armazenamento local)                  |
-| `showSeekButtons`         | `boolean`            | Botões de avanço/retrocesso de dez segundos, quando há linha do tempo |
-| `subtitles`               | `boolean`            | Exibição inicial de legendas externas                                 |
-| `enableCc`                | `boolean`            | Seleção inicial de legenda embutida (CC), separada da externa         |
-| `subtitleLanguage`        | `string \| null`     | Idioma preferido de legenda (`pt-br`, `en-US`, ...); `null` começa sem legenda |
-| `subtitlePosition`        | `'inner' \| 'outer'` | Legenda sobre o vídeo ou numa faixa reservada abaixo dele             |
-| `showInfo`                | `boolean`            | Painel de estatísticas de transmissão                                 |
-| `playbackSpeeds`          | `number[] \| string` | Velocidades do menu (positivas, até 16); string separada por vírgulas |
-| `controls`                | `string[] \| false`  | Lista de controles da barra; `false` oculta e `[]` restaura o padrão  |
-| `cast`                    | `boolean \| object`  | Chromecast/AirPlay; aceita `{ receiverAppId, enabled }`               |
-| `isApp`                   | `boolean`            | App de TV empacotado; sem isso a skin automática de TV não entra      |
+| Opção                      | Tipo                 | Efeito                                                                               |
+| -------------------------- | -------------------- | ------------------------------------------------------------------------------------ |
+| `autoplay`/`muted`/`loop`  | `boolean`            | Estado inicial de reprodução                                                         |
+| `startTime`                | `number`             | Segundos iniciais do primeiro VOD; ignorado em conteúdo ao vivo                      |
+| `resume`                   | `boolean`            | Retoma de onde parou (backend + armazenamento local)                                 |
+| `showSeekButtons`          | `boolean`            | Botões de avanço/retrocesso de dez segundos, quando há linha do tempo                |
+| `subtitles`                | `boolean`            | Exibição inicial de legendas externas                                                |
+| `enableCc`                 | `boolean`            | Seleção inicial de legenda embutida (CC), separada da externa                        |
+| `subtitleLanguage`         | `string \| null`     | Idioma preferido de legenda (`pt-br`, `en-US`, ...); `null` começa sem legenda       |
+| `subtitlePosition`         | `'inner' \| 'outer'` | Legenda sobre o vídeo ou numa faixa reservada abaixo dele                            |
+| `showInfo`                 | `boolean`            | Painel de estatísticas de transmissão                                                |
+| `vodBufferingGoal`         | `number`             | Alvo do buffer à frente de VOD, em segundos; omitido usa o perfil do dispositivo     |
+| `p2pVodDownloadTimeWindow` | `number`             | Janela em segundos para pré-download de VOD (CDN e peers) com P2P ativo; padrão `60` |
+| `playbackSpeeds`           | `number[] \| string` | Velocidades do menu (positivas, até 16); string separada por vírgulas                |
+| `controls`                 | `string[] \| false`  | Lista de controles da barra; `false` oculta e `[]` restaura o padrão                 |
+| `cast`                     | `boolean \| object`  | Chromecast/AirPlay; aceita `{ receiverAppId, enabled }`                              |
+| `isApp`                    | `boolean`            | App de TV empacotado; sem isso a skin automática de TV não entra                     |
+
+`p2pVodDownloadTimeWindow` aceita um número finito não negativo; zero desliga
+esse pré-download. Valor inválido gera aviso e mantém o padrão de 60 segundos.
+Ele não altera o buffer normal de reprodução do player.
+
+`vodBufferingGoal` configura o alvo do buffer à frente na reprodução normal do
+VOD, inclusive sem P2P. Precisa ser um número finito maior que zero; valor
+inválido gera aviso e mantém o perfil do dispositivo. A opção não altera lives,
+valores abaixo do mínimo necessário para retomar são ajustados com aviso, e o
+alvo pode não ser atingido se a rede ou a disponibilidade de segmentos não
+permitirem.
 
 ### Miniplayer e PiP automático
 
