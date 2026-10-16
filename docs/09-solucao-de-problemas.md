@@ -9,9 +9,15 @@ UID persistente retornado por `getSessionId()`. Ele permanece igual nas
 retentativas. A data/hora usa o relógio do dispositivo, mesmo quando a falha
 ocorre antes de autorizar a sessão.
 
-Durante uma falha transitória de rede, a tela informa a próxima retentativa.
-Ao esgotar o limite, **Tentar novamente** inicia outro ciclo. A política pode
-ser desligada ou ajustada por `autoRetry` no construtor, conforme a
+Na próxima versão, `NETWORK_ERROR` não exibe tela nem aviso de erro: o player
+retenta indefinidamente, com espera progressiva limitada a 30 segundos por
+padrão, mesmo com `autoRetry: false` ou limite zero. Eventos e telemetria
+continuam disponíveis para diagnóstico. Uma nova carga, `stop()`, `unload()`
+ou `destroy()` cancela a recuperação anterior.
+
+Para outros códigos transitórios, a tela fica oculta durante a recuperação
+automática; ao esgotar o limite, **Tentar novamente** inicia outro ciclo.
+Essa política pode ser desligada ou ajustada por `autoRetry`, conforme a
 [referência da API](02-referencia-api.md#recuperação-automática-de-rede).
 
 ## Autoplay com som nunca começa

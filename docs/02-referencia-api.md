@@ -157,7 +157,15 @@ somente a ativação por viewport fica indisponível.
 
 ### Recuperação automática de rede
 
-Nas versões que incluem `autoRetry`, falhas transitórias de rede recebem três
+Na próxima versão, `NETWORK_ERROR` nunca abre a tela de erro e retenta sem
+limite até recuperar ou a sessão ser interrompida. As esperas padrão são 2,
+4, 8, 16 e 30 segundos, mantendo o teto de 30 segundos depois disso.
+A regra vale para qualquer HTTP ou tipo de requisição classificado com esse
+código, inclusive com `autoRetry: false` ou `maxRetries: 0`.
+Erros recuperáveis continuam sob a recuperação interna, sem recarregar a mídia;
+eventos de erro e telemetria permanecem intactos.
+
+As demais falhas transitórias de transporte recebem três
 retentativas extras após 2, 4 e 8 segundos. São retentativas de carga, além das
 tentativas internas de cada requisição; a espera começa após a falha anterior.
 
@@ -173,13 +181,15 @@ const player = new SpallaPlayer("#player", {
 ```
 
 Omitir a opção ou passar `true` usa esses padrões. `autoRetry: false` ou
-`maxRetries: 0` desliga o automático. Os atrasos são em milissegundos;
+`maxRetries: 0` desliga o automático somente para os demais códigos de erro.
+`baseDelay`, `backoffFactor` e `maxDelay` também ajustam as esperas de
+`NETWORK_ERROR`. Os atrasos são em milissegundos;
 valores inválidos usam os padrões. O limite é inteiro não negativo, o fator
 é pelo menos 1 e os atrasos são positivos. Não há parâmetro de URL equivalente.
 
-Somente falhas transitórias de transporte são elegíveis, inclusive durante
-autorização e configuração. HTTP 401/403/404, bloqueios de acesso, mídia
-inválida, DRM e erros de publicidade não são repetidos automaticamente.
+Fora de `NETWORK_ERROR`, somente falhas transitórias de transporte são elegíveis,
+inclusive durante autorização e configuração. HTTP 401/403/404, bloqueios de
+acesso, mídia inválida, DRM e erros de publicidade não são repetidos automaticamente.
 
 VOD conserva a posição e a intenção de reprodução; live retorna à posição
 ao vivo. `load()`, `stop()`, `unload()` e `destroy()` cancelam a recuperação
