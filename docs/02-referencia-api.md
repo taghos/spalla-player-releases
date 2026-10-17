@@ -436,9 +436,9 @@ player.on("*", (event, metadata) => {
 - **Publicidade e cast**: `adstarted` `adended` `aderror` `daifallback` `caststatechange`
 
 O `aderror` traz `code` e `message` do erro de anúncio. O `daifallback` avisa
-que o intervalo comercial costurado ao vídeo não veio e a reprodução seguiu
-pelo conteúdo normal, com o motivo em `reason` (`sdk_ausente` ou
-`stream_error`). O `error` só é emitido quando a reprodução para: falha que o
+que o intervalo comercial costurado ao vídeo não veio, ou veio e não carregou,
+e a reprodução seguiu pelo conteúdo normal, com o motivo em `reason`
+(`sdk_ausente`, `stream_error` ou `erro_ao_iniciar`). O `error` só é emitido quando a reprodução para: falha que o
 player recupera sozinho não chega a quem escuta.
 
 ## Chromecast
