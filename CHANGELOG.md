@@ -17,6 +17,34 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.6] — 2026-10-17
+
+BUG/MAJOR
+
+### Fixed
+
+- BUG/MAJOR — Em live com dois sinais redundantes (inclusive com anúncios
+  costurados pelo DAI), a queda de um sinal antes do início fazia a carga
+  falhar com erro de rede, mesmo com o outro sinal no ar. A playlist que não
+  responde agora é pedida ao outro sinal já na tentativa seguinte, e as demais
+  qualidades passam a preferir o sinal que respondeu.
+
+- BUG/MAJOR — Se o stream com anúncios costurados pelo DAI não carregar, a
+  reprodução segue pelo conteúdo normal, sem anúncios do servidor, em vez de
+  exibir erro. O `daifallback` é emitido com `reason: 'erro_ao_iniciar'`.
+
+### Changed
+
+- MINOR — Após recarregar a página, o player volta a iniciar pela CDN definida
+  na configuração, mesmo que uma troca automática tenha ocorrido antes.
+
+- MEDIUM — `NETWORK_ERROR` não exibe aviso de erro e retenta sem limite,
+  mesmo com recuperação automática desligada ou limite zero. As esperas
+  continuam progressivas, com teto padrão de 30 segundos; nova carga ou
+  interrupção da sessão cancela as tentativas.
+
+- MINOR — Otimizações internas de performance na telemetria.
+
 ## [1.1.5] — 2026-10-15
 
 BUG/MINOR
