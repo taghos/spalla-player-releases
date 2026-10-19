@@ -17,6 +17,17 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.9] — 2026-10-19
+
+BUG/MEDIUM
+
+### Fixed
+
+- BUG/MEDIUM — Legendas externas em SRT informadas pela configuração do vídeo
+  passam a aparecer no menu e na reprodução, mesmo quando ausentes do manifesto.
+- BUG/MINOR — O item de estatísticas da skin `vibranium` volta a abrir o painel
+  depois de anúncios ou outras reconstruções da barra de controles.
+
 ## [1.1.8] — 2026-10-19
 
 MINOR
