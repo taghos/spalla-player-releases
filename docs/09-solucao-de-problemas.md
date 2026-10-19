@@ -42,6 +42,14 @@ Se você precisa mesmo começar com som, isso só é possível em resposta diret
 a uma interação do usuário (por exemplo, um clique num botão "assistir"), e
 mesmo assim alguns navegadores podem recusar.
 
+## Legendas do vídeo não aparecem
+
+Na próxima versão, vídeos com legendas SRT cadastradas na configuração também
+carregam essas faixas quando elas não estão declaradas no manifesto. Elas
+aparecem no menu de legendas, sem duplicar faixas do mesmo idioma já presentes.
+Não é necessário mudar a integração. `subtitleLanguage: null` continua
+iniciando sem legenda, com as faixas disponíveis no menu.
+
 ## Chromecast: "o cast não funciona"
 
 Esse sintoma tem causas bem diferentes entre si — o primeiro passo é
