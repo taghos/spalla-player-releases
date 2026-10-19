@@ -17,6 +17,17 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.12] — 2026-10-19
+
+MINOR
+
+### Changed
+
+- MINOR — Lives ao vivo agora mantêm de 25 a 30 segundos de vídeo já baixado
+  à frente da reprodução (antes, 15 a 20), para assistir sem engasgos em
+  redes instáveis. Em contrapartida, a transmissão chega com cerca de 10
+  segundos a mais de atraso em relação ao ao vivo.
+
 ## [1.1.11] — 2026-10-19
 
 MINOR
