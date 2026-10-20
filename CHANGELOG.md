@@ -17,6 +17,14 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.15] — 2026-10-20
+
+MINOR
+
+### Added
+
+- MINOR — Otimizações internas de performance na telemetria.
+
 ## [1.1.14] — 2026-10-20
 
 MINOR
