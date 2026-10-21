@@ -17,6 +17,24 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.17] — 2026-10-21
+
+BUG/MAJOR
+
+### Fixed
+
+- BUG/MAJOR — Em transmissões ao vivo, a camada interna de entrega de vídeo
+  podia encaixar um trecho de outro momento no lugar do atual: a imagem
+  saltava, travava por alguns segundos e áudio e vídeo saíam de fase.
+  Corrigida a identificação dos segmentos nessa camada e adicionada uma
+  conferência de continuidade que descarta o que chega fora de lugar.
+
+### Changed
+
+- MEDIUM — Erros `UNKNOWN` deixam de abrir a tela de erro, emitir o evento
+  público `error` ou interferir na recuperação e no miniplayer. O diagnóstico
+  segue somente na telemetria, como `erro_unknown`, sem `error` nem `initerror`.
+
 ## [1.1.16] — 2026-10-21
 
 BUG/MEDIUM
