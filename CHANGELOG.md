@@ -17,6 +17,20 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.16] — 2026-10-21
+
+BUG/MEDIUM
+
+### Fixed
+
+- BUG/MEDIUM — Corrige lives com Google DAI que não iniciavam no desktop
+  quando um dos sinais estava indisponível e os encoders anunciavam bitrates
+  diferentes. O pré-roll de cliente também deixa de impedir a reserva sem
+  anúncios do servidor caso o manifesto costurado falhe.
+- BUG/MINOR — Remove a seleção duplicada de áudio em transmissões com áudio
+  multiplexado quando variantes ainda não identificadas repetem a faixa já
+  conhecida, preservando idiomas e opções multicanal reais.
+
 ## [1.1.15] — 2026-10-20
 
 MINOR
