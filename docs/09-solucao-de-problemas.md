@@ -20,6 +20,12 @@ automática; ao esgotar o limite, **Tentar novamente** inicia outro ciclo.
 Essa política pode ser desligada ou ajustada por `autoRetry`, conforme a
 [referência da API](02-referencia-api.md#recuperação-automática-de-rede).
 
+Na próxima versão, `UNKNOWN` fica somente na telemetria, no evento
+`erro_unknown`: não abre tela, não publica `error`, não gera `initerror` e não
+interrompe a recuperação ou o miniplayer. Essa política não recupera uma
+reprodução já interrompida pela falha interna; erros durante `load()` continuam
+rejeitando a Promise.
+
 ## Autoplay com som nunca começa
 
 **Sintoma**: `autoplay: true` sem `muted`, e o vídeo fica carregado mas

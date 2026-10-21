@@ -441,6 +441,13 @@ e a reprodução seguiu pelo conteúdo normal, com o motivo em `reason`
 (`sdk_ausente`, `stream_error` ou `erro_ao_iniciar`). O `error` só é emitido quando a reprodução para: falha que o
 player recupera sozinho não chega a quem escuta.
 
+Na próxima versão, erros `UNKNOWN` não emitem `error`, não abrem a tela de
+erro nem acionam recuperação automática. O diagnóstico sanitizado segue
+somente na telemetria como `erro_unknown`, sem `error` ou `initerror`,
+inclusive antes do primeiro quadro. Isso não corrige a falha interna nem
+garante continuidade da reprodução; se ocorrer durante `load()`, a Promise
+continua rejeitando.
+
 ## Chromecast
 
 O envio replica o estado do player para o dispositivo — a API pública
