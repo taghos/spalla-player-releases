@@ -17,6 +17,16 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.18] — 2026-10-22
+
+BUG/MINOR
+
+### Fixed
+
+- BUG/MINOR — O controle de velocidade fica oculto por padrão em lives, com
+  ou sem DVR, em todas as skins. O integrador pode habilitá-lo incluindo
+  `playback_rate` na lista explícita de controles.
+
 ## [1.1.17] — 2026-10-21
 
 BUG/MAJOR

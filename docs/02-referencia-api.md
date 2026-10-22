@@ -345,6 +345,13 @@ player.setControls([]); // volta ao padrão da skin/dispositivo
 player.setControls(false); // mantém a barra oculta
 ```
 
+Em lives, com ou sem DVR, a seleção de velocidade fica oculta por padrão em
+todas as skins. Para habilitá-la, inclua `playback_rate` na lista explícita de
+`controls` do construtor ou de `setControls`. `playbackSpeeds` escolhe apenas
+os valores do menu, não habilita o botão em lives. A configuração
+`sp_player_seek` controla os saltos de dez segundos, não a velocidade.
+VOD mantém o comportamento anterior.
+
 #### Lista de controles suportados
 
 Nomes aceitos em `controls` (opção do construtor) e em `setControls(nomes)`:
