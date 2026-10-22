@@ -17,6 +17,17 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.19] — 2026-10-22
+
+BUG/MINOR
+
+### Fixed
+
+- BUG/MINOR — Os itens do seletor de qualidade da skin `samba` deixam de ter
+  cantos arredondados.
+- BUG/MINOR — O menu de velocidade da skin `samba` volta a ser uma lista
+  vertical simples, sem o ajuste contínuo nem os botões em cápsula.
+
 ## [1.1.18] — 2026-10-22
 
 BUG/MINOR
