@@ -17,6 +17,18 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.21] — 2026-10-22
+
+MINOR
+
+### Changed
+
+- MINOR — Em caixas de menos de 360px, comuns em celular, as skins `vibranium` e
+  `samba` encolhem a fileira de controles e o menu de configurações, que antes
+  ficavam grandes demais. A raiz do player publica a nova classe `sp-w-xs` a
+  partir de 360px. No celular, os ícones do menu da `samba` seguem a mesma
+  medida compacta e a `vibranium` volta a listar as estatísticas no menu.
+
 ## [1.1.20] — 2026-10-22
 
 MINOR
