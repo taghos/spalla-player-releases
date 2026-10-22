@@ -17,6 +17,28 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.20] — 2026-10-22
+
+MINOR
+
+### Added
+
+- MINOR — Falha de reprodução não vira tela de erro na primeira ocorrência. O
+  player percorre uma escada de recuperação: os primeiros degraus são leves e
+  reusam a sessão — a engine refaz manifesto e segmentos e continua do mesmo
+  ponto, sem refazer autorização nem configuração —, o segundo deles troca de
+  CDN antes, e o último de cada rodada refaz a carga inteira, como recomeçar o
+  player, prendendo a menor qualidade. O ciclo se repete duas vezes por
+  padrão antes de abrir a tela, que passa a oferecer nova tentativa para todos
+  esses códigos. `MEDIA_ERROR`, `MANIFEST_ERROR`, `STREAMING_ERROR`,
+  `TEXT_ERROR` e `DRM_ERROR` fatais entram na escada junto das falhas de
+  transporte; `NETWORK_ERROR` segue ilimitado e sem tela. O orçamento é
+  `maxRetries × ciclos`, com `ciclos` novo em `autoRetry` (padrão 2), renovado
+  após 30 segundos de reprodução estável, que também devolve a qualidade livre.
+  Com `?cdn=` ou `setCdn()` fixando a origem, os degraus de CDN ficam de fora.
+  Recusas de acesso, conteúdo inválido e erros de uso da API seguem sem
+  retentativa.
+
 ## [1.1.19] — 2026-10-22
 
 BUG/MINOR
@@ -26,7 +48,8 @@ BUG/MINOR
 - BUG/MINOR — Os itens do seletor de qualidade da skin `samba` deixam de ter
   cantos arredondados.
 - BUG/MINOR — O menu de velocidade da skin `samba` volta a ser uma lista
-  vertical simples, sem o ajuste contínuo nem os botões em cápsula.
+  vertical simples, sem o ajuste contínuo nem os botões em cápsula, e a
+  velocidade 1x aparece como "Normal".
 
 ## [1.1.18] — 2026-10-22
 

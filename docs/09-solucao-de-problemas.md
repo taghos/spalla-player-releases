@@ -15,9 +15,15 @@ padrão, mesmo com `autoRetry: false` ou limite zero. Eventos e telemetria
 continuam disponíveis para diagnóstico. Uma nova carga, `stop()`, `unload()`
 ou `destroy()` cancela a recuperação anterior.
 
-Para outros códigos transitórios, a tela fica oculta durante a recuperação
-automática; ao esgotar o limite, **Tentar novamente** inicia outro ciclo.
-Essa política pode ser desligada ou ajustada por `autoRetry`, conforme a
+Falha de reprodução não abre a tela de erro na primeira ocorrência: o player
+percorre uma escada de recuperação — degraus leves que reusam a sessão (a
+engine refaz manifesto e segmentos do mesmo ponto), um deles já em outra CDN,
+e o último de cada rodada refazendo a carga inteira — repetindo o ciclo
+(`autoRetry.ciclos`, padrão 2) antes de admitir a falha. `MEDIA_ERROR`, `MANIFEST_ERROR`, `STREAMING_ERROR`,
+`TEXT_ERROR` e `DRM_ERROR` fatais entram na escada junto das falhas de
+transporte. A tela fica oculta durante a recuperação automática; ao esgotá-la,
+**Tentar novamente** recomeça a escada. Essa política pode ser desligada ou
+ajustada por `autoRetry`, conforme a
 [referência da API](02-referencia-api.md#recuperação-automática-de-rede).
 
 Na próxima versão, `UNKNOWN` fica somente na telemetria, no evento

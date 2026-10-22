@@ -157,17 +157,24 @@ somente a ativação por viewport fica indisponível.
 
 ### Recuperação automática de rede
 
-Na próxima versão, `NETWORK_ERROR` nunca abre a tela de erro e retenta sem
-limite até recuperar ou a sessão ser interrompida. As esperas padrão são 2,
-4, 8, 16 e 30 segundos, mantendo o teto de 30 segundos depois disso.
+Falha de reprodução não abre a tela de erro na primeira ocorrência: o player
+percorre uma escada de recuperação antes de admitir a falha. Os primeiros
+degraus são leves e reusam a sessão: a engine refaz manifesto e segmentos e
+continua do mesmo ponto, sem refazer autorização nem configuração — o segundo
+deles troca de CDN antes, quando o conteúdo tem mais de uma elegível. O último
+degrau de cada rodada refaz a carga inteira, como recomeçar o player, prendendo
+a menor qualidade, porque mídia truncada numa variante alta costuma tocar na
+menor. O ciclo se repete `ciclos` vezes (padrão 2) e só então a tela de erro
+abre, com botão para tentar de novo, que recomeça a escada. Trinta segundos de
+reprodução estável renovam o orçamento e devolvem a qualidade livre.
+
+`NETWORK_ERROR` nunca abre a tela de erro e retenta sem limite — subindo os
+mesmos degraus — até recuperar ou a sessão ser interrompida. As esperas padrão
+são 2, 4, 8, 16 e 30 segundos, mantendo o teto de 30 segundos depois disso.
 A regra vale para qualquer HTTP ou tipo de requisição classificado com esse
 código, inclusive com `autoRetry: false` ou `maxRetries: 0`.
 Erros recuperáveis continuam sob a recuperação interna, sem recarregar a mídia;
-eventos de erro e telemetria permanecem intactos.
-
-As demais falhas transitórias de transporte recebem três
-retentativas extras após 2, 4 e 8 segundos. São retentativas de carga, além das
-tentativas internas de cada requisição; a espera começa após a falha anterior.
+eventos de erro e telemetria permanecem intactos durante toda a escada.
 
 ```js
 const player = new SpallaPlayer("#player", {
@@ -176,6 +183,7 @@ const player = new SpallaPlayer("#player", {
     baseDelay: 2000,
     backoffFactor: 2,
     maxDelay: 30000,
+    ciclos: 2,
   },
 });
 ```
@@ -185,17 +193,23 @@ Omitir a opção ou passar `true` usa esses padrões. `autoRetry: false` ou
 `baseDelay`, `backoffFactor` e `maxDelay` também ajustam as esperas de
 `NETWORK_ERROR`. Os atrasos são em milissegundos;
 valores inválidos usam os padrões. O limite é inteiro não negativo, o fator
-é pelo menos 1 e os atrasos são positivos. Não há parâmetro de URL equivalente.
+é pelo menos 1, `ciclos` é inteiro pelo menos 1 e os atrasos são positivos.
+Não há parâmetro de URL equivalente.
 
-Fora de `NETWORK_ERROR`, somente falhas transitórias de transporte são elegíveis,
+Entram na escada as falhas de transporte e, entre os fatais,
+`MEDIA_ERROR`, `MANIFEST_ERROR`, `STREAMING_ERROR`, `TEXT_ERROR` e `DRM_ERROR`,
 inclusive durante autorização e configuração. HTTP 401/403/404, bloqueios de
-acesso, mídia inválida, DRM e erros de publicidade não são repetidos automaticamente.
+acesso, conteúdo inválido e erros de publicidade não são repetidos
+automaticamente: recarregar não muda a resposta.
 
 VOD conserva a posição e a intenção de reprodução; live retorna à posição
 ao vivo. `load()`, `stop()`, `unload()` e `destroy()` cancelam a recuperação
-anterior. `retry()` antecipa uma espera e abre outro orçamento, sem criar
-cargas concorrentes. O limite automático só renova após 30 segundos de
-reprodução estável, sem pausa, buffering ou anúncio, ou por nova carga explícita.
+anterior. `retry()` antecipa uma espera, recomeça a escada do primeiro degrau
+e não cria cargas concorrentes. O orçamento automático só renova após 30
+segundos de reprodução estável, sem pausa, buffering ou anúncio, ou por nova
+carga explícita. A CDN escolhida numa recuperação não persiste: a próxima
+carga volta à inicial, e uma origem fixada por `?cdn=` não é abandonada pelos
+degraus de CDN.
 
 ### Fontes de conteúdo
 
