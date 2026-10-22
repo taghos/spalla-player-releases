@@ -17,6 +17,19 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.22] — 2026-10-22
+
+BUG/MINOR
+
+### Fixed
+
+- BUG/MINOR — A telemetria deixa de contar como rebuffer o tempo em que o
+  player está pausado, no fim do conteúdo ou descarregado. A flag
+  `fazendo_rebuffer` só desligava no quadro seguinte: pausar no meio de uma
+  espera, ou cair no banner de fim depois dela, seguia reportando rebuffer a
+  cada ping até o espectador voltar a tocar, e os painéis liam audiência parada
+  como rebuffer. Nada muda na reprodução.
+
 ## [1.1.21] — 2026-10-22
 
 MINOR
