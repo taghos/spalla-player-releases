@@ -17,6 +17,19 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.25] — 2026-10-28
+
+MINOR
+
+### Added
+
+- MINOR — Qualidade fixada à mão volta para o automático sozinha quando o
+  vídeo trava por falta de banda: faixa presa não desce sozinha, e o
+  rebuffer recorrente nela é o que o espectador relata como “não ajusta”.
+  A retomada sai no evento de telemetria `abr_auto_retomado`, com a altura
+  presa, para acompanhar o efeito por sessão. Reproduz por `player.bus`
+  (`abrautoresumed`); o cast fica de fora.
+
 ## [1.1.24] — 2026-10-28
 
 BUG/MINOR
