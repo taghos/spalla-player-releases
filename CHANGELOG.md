@@ -17,6 +17,20 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.23] — 2026-10-28
+
+BUG/MEDIUM
+
+### Fixed
+
+- BUG/MEDIUM — O convite para o próximo vídeo da playlist aparece somente nos
+  últimos cinco segundos e acompanha a posição da mídia, inclusive em pausas e
+  buscas. O avanço automático espera o vídeo terminar, em vez de cortar a
+  reprodução cinco segundos depois de abrir o convite.
+- BUG/MINOR — A lista lateral da playlist exibe a miniatura de cada vídeo e
+  limita títulos longos ao espaço disponível com reticências, sem ultrapassar
+  a largura do painel. O título completo continua disponível ao passar o mouse.
+
 ## [1.1.22] — 2026-10-22
 
 BUG/MINOR
