@@ -410,6 +410,44 @@ o token `plugins` dentro da lista de controles (ver
 | `isCasting()`              | Diz se uma sessão de Chromecast está ativa                      | `player.isCasting()` → `false`               |
 | `startAirPlay()`           | Abre o seletor nativo de AirPlay (Safari/WebKit)                | `player.startAirPlay();`                     |
 
+#### Pre-roll de vídeo próprio
+
+A configuração do backend pode incluir uma abertura em `sp_pre_roll`:
+
+```json
+{
+  "sp_pre_roll": {
+    "enabled": true,
+    "source": "https://midia.exemplo.com/abertura.mp4",
+    "destinationUrl": "https://site.exemplo.com/oferta",
+    "skippable": true,
+    "skipAfterSeconds": 5
+  }
+}
+```
+
+`source` aceita URL HTTP(S), com CORS quando exigido pelo formato, ou ID de
+VOD Spalla (UUID ou ID Samba). IDs de live/playlist e vídeos em processamento
+são recusados como peça. Sua autorização é isolada da sessão do conteúdo
+principal, e anúncios configurados na própria peça não rodam.
+
+- `enabled` precisa estar ligado; ausente ou desligado preserva o comportamento.
+- Sem `skippable: true`, não há skip. Com ele, a espera padrão é **5 segundos**;
+  `skipAfterSeconds: 0` libera imediatamente. Valores negativos, fracionários
+  ou inválidos geram aviso e usam 5.
+- `destinationUrl` é opcional e precisa ser HTTP(S). Clicar no vídeo abre
+  nova aba sem pausar a peça; destino inválido é ignorado com aviso.
+- A ordem é abertura própria → IMA/VMAP/VAST → conteúdo. Intervalos DAI
+  costurados continuam valendo. Em playlist, só o primeiro item reproduzido
+  recebe a abertura.
+- `autoplay: false` espera gesto normalmente. `ads: false`, modo áudio, Cast e
+  contextos sem suporte a vídeo de anúncio separado não exibem a peça. A
+  proteção de fullscreen do iPhone vale como nos demais anúncios de cliente.
+- Falhas da peça deixam seguir conteúdo e anúncios existentes, com diagnóstico
+  no log e `aderror` se a falha ocorrer na reprodução. `adstarted`, `adended`,
+  `isAdPlaying()` e `skipAd()` mantêm o contrato dos demais anúncios; pular
+  respeita a permissão e o tempo configurados.
+
 ### Diagnóstico
 
 | Método                | O que faz                                                    | Exemplo / retorno                                  |
