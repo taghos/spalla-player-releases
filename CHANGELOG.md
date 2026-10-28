@@ -17,6 +17,28 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.27] — 2026-10-28
+
+BUG/MINOR
+
+### Fixed
+
+- BUG/MINOR — O bloqueio por referrer não mostrava a imagem enviada pela
+  autorização e expunha o código `REFERRER_BLOCKED` na tela. A thumb do
+  `/auth` agora fica como fundo do poster, e o código técnico não aparece no
+  overlay.
+
+### Changed
+
+- MINOR — A retomada do automático em qualidade fixa (1.1.25) ficou menos
+  gatilho: fome logo depois de um seek não conta — quem fixa a qualidade e
+  navega pela aula aterrissa em trechos sem buffer o tempo todo, e o primeiro
+  `waiting` retomava o ajuste contra a intenção do espectador, que refixava
+  na sequência; e a retomada agora exige duas fomes na mesma altura, porque
+  a primeira pode ser oscilação passageira. Refixar outra faixa ou trocar de
+  conteúdo recomeça a conta. O evento de telemetria `abr_auto_retomado`
+  continua, e deve sair bem menos.
+
 ## [1.1.26] — 2026-10-28
 
 BUG/MEDIUM
