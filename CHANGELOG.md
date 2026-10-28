@@ -17,6 +17,22 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.24] — 2026-10-28
+
+BUG/MINOR
+
+### Added
+
+- MEDIUM — Pre-roll de vídeo próprio por `sp_pre_roll`, com URL HTTP(S) ou
+  ID de VOD, destino de clique e skip configurável. A abertura antecede os
+  anúncios já configurados, respeita autoplay e o primeiro item da playlist,
+  e deixa o conteúdo seguir se a peça falhar.
+
+### Fixed
+
+- BUG/MINOR — Contador e botão de pular compartilham um único bloco
+  arredondado; o rótulo em português passa a ser apenas “Pular”.
+
 ## [1.1.23] — 2026-10-28
 
 BUG/MEDIUM
