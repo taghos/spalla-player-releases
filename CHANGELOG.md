@@ -17,6 +17,21 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.26] — 2026-10-28
+
+BUG/MEDIUM
+
+### Fixed
+
+- BUG/MEDIUM — A escada de retry ficava presa na origem inicial em VOD gravado
+  de live: o filtro de CDNs por DVR ignorava que o `lm_live_dvr` da gravação
+  sobrevive na configuração, a lista elegível saía com uma origem só (a de
+  peso 255, quando existe) e nenhuma troca de CDN acontecia — enquanto a CDN
+  inicial falhasse, o conteúdo era inatingível e o player repetia a carga sem
+  fim. O filtro agora vale só em live, onde a janela de DVR de fato depende
+  da origem. Visto na tempestade de erros de 2026-10-28, com 140 mil eventos
+  de um único conteúdo numa CDN bloqueada por WAF.
+
 ## [1.1.25] — 2026-10-28
 
 MINOR
