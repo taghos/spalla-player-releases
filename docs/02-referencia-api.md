@@ -300,7 +300,7 @@ tratar os dois casos separadamente no seu código.
 | Método                                  | O que faz                                             | Exemplo / retorno                                        |
 | --------------------------------------- | ----------------------------------------------------- | -------------------------------------------------------- |
 | `getVideoQualities()`                   | Lista as qualidades de vídeo disponíveis              | `player.getVideoQualities()` → `[{ height: 1080, ... }]` |
-| `setVideoQuality(altura)`               | Fixa a qualidade de vídeo por altura, ou libera o ABR | `player.setVideoQuality(720);`                           |
+| `setVideoQuality(altura)`               | Fixa a qualidade por altura, ou libera o ABR com `'auto'`. Se a conexão não der conta e o vídeo travar, a qualidade fixa volta para o automático sozinha | `player.setVideoQuality(720);`                          |
 | `limitQuality(bool)`                    | Restringe a qualidade automática a um teto            | `player.limitQuality(true);`                             |
 | `getAudioTracks()`                      | Lista as faixas de áudio disponíveis                  | `player.getAudioTracks()` → `[{ language: 'pt', ... }]`  |
 | `setAudioTrack(idioma, papel)`          | Troca a faixa de áudio ativa                          | `player.setAudioTrack('en');`                            |
