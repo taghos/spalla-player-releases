@@ -17,6 +17,26 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.28] — 2026-10-29
+
+BUG/MEDIUM
+
+### Fixed
+
+- BUG/MEDIUM — A flag de rebuffer ficava presa em `true` pelo resto da
+  sessão depois de um buffering que terminava sem um novo evento `playing`
+  na mídia — em gagueja ou logo após um seek, o elemento nunca sai do
+  estado playing, e cada segundo da sessão passava a contar como travado.
+  Numa live de apostas, 98,5% dos pings marcados em rebuffer tinham o
+  playhead avançando normalmente. O fim do buffering da engine agora
+  encerra o rebuffer, além dos sinais de mídia que já fechavam.
+- BUG/MINOR — Partidas mais rápidas que o módulo de telemetria perdiam o
+  evento `firstplaying` (e os demais do arranque): os listeners só eram
+  ligados depois do WebAssembly carregar, e o marco de “assistiu” saía
+  apenas quando o espectador demorava a tocar — nas partidas mais rápidas, a maioria das sessões ficava sem ele. Os eventos de
+  reprodução agora são registrados desde a criação do coletor e drenados na
+  chegada do módulo, com o horário original.
+
 ## [1.1.27] — 2026-10-28
 
 BUG/MINOR
