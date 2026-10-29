@@ -17,6 +17,47 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.29] — 2026-10-29
+
+BUG/MEDIUM
+
+### Added
+
+- MINOR — O nome `like` numa lista explícita de `controls` (construtor,
+  `setControls` ou `?controls=`) ativa o botão de curtidas na barra, mesmo
+  sem a flag de curtidas do backend. Como no player anterior, a lista é quem
+  fala; a flag `sp_player_curtidas` segue ativando sozinha, e o formato
+  legado de `controls` mantém o comportamento de sempre.
+
+### Fixed
+
+- BUG/MINOR — Na skin `samba`, o botão de legenda usava um desenho próprio e o
+  de PiP o ícone padrão do motor; nenhum dos dois era o do player de produção,
+  que é a referência da skin. Os dois agora usam os glifos de lá — legenda com
+  o mesmo desenho ligada e desligada, sem o risco sobreposto, e PiP com o
+  quadro e o quadradinho do canto.
+
+- BUG/MINOR — Na skin `samba`, passar o cursor por um botão da barra desenhava
+  uma linha escura logo acima dele: a dica de texto do hover nasce acima da
+  fileira, e a rolagem horizontal de listas longas a corta — só na `samba`,
+  cujo painel é mais alto que os botões, sobrava uma fatia visível. A dica
+  nunca chegou a aparecer em skin nenhuma; desligada até ganhar um lugar fora
+  do corte, como no player de produção, que não tem rótulo no hover.
+
+- BUG/MEDIUM — A lista de `controls` era aplicada na ordem em que era escrita;
+  no player anterior ela dizia apenas **quais** controles aparecem, sobre uma
+  fileira de layout fixo. Quem veio da integração antiga passou a ver a barra
+  desfigurada — botões amontoados à esquerda, sem o espaço elástico que separa
+  o bloco da direita, e cada botão fora do lugar de lá. A lista explícita agora
+  usa a fileira do player de produção, igual em qualquer skin: a lista escolhe
+  quem aparece e a fileira nunca muda. `settings` volta a acender o botão de
+  qualidade, que era o mesmo controle no formato anterior, e o que a lista
+  legada não conhecia — PiP e botões de plugin — segue os próprios
+  interruptores (`pip`, `enableLikes`), como seguia no player anterior. A
+  lista legada também é traduzida quando vem pela query string
+  (`?controls=`), que antes recebia os nomes brutos e montava a fileira com
+  nomes desconhecidos.
+
 ## [1.1.28] — 2026-10-29
 
 BUG/MEDIUM
