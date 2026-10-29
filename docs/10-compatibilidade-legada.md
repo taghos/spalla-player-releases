@@ -68,7 +68,7 @@ automaticamente para os controles atuais:
 | `fullscreen` | `fullscreen`                |
 | `forward`    | `forward_10`                |
 | `backward`   | `rewind_10`                 |
-| `settings`   | `overflow_menu`             |
+| `settings`   | `quality` (o mesmo botão)   |
 | `cast`       | `cast`, `remote`            |
 | `info`       | `statistics`                |
 | `seekbar`    | (liga a barra de progresso) |
@@ -80,6 +80,12 @@ controls: ["play", "pause", "time", "seekbar", "volume", "fullscreen"];
 `controls: '0'` ou `controls: '-'` (string) escondem a barra inteira, igual ao
 parâmetro de URL equivalente. Um nome que não conste na tabela é mantido como
 está — permitindo citar diretamente um nome de controle atual, se preferir.
+
+Como no player anterior, a lista diz apenas **quais** controles aparecem; a
+fileira é a do player, sempre a mesma, em qualquer skin. Botões de plugin
+entram entre qualidade e velocidade, e o que o formato antigo não conhecia —
+PiP, curtidas e os demais botões de plugin — segue os próprios interruptores
+(`pip`, `enableLikes`, flag do backend), como seguia lá.
 
 ## `currentTime()` e `playbackRate()` como funções
 

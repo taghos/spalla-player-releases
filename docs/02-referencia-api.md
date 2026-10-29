@@ -349,15 +349,23 @@ player.addControlButton({
 player.removeControlButton("ajuda");
 ```
 
-`setControls(nomes)` troca a lista inteira de controles da barra (a ordem do
-array é a ordem visual). Botões de plugin, `rewind_10` e `forward_10` **não**
-são reinseridos automaticamente — quem quiser mantê-los precisa nomeá-los.
+`setControls(nomes)` troca a lista inteira de controles da barra. A lista diz
+**quem** aparece; a fileira é uma só — a do player, com o transporte e o tempo
+à esquerda e os ajustes depois do espaço elástico — e não muda com a skin nem
+com o dispositivo, igual ao formato antigo.
 
 ```js
 player.setControls(["play_pause", "time_and_duration", "spacer", "fullscreen"]);
 player.setControls([]); // volta ao padrão da skin/dispositivo
 player.setControls(false); // mantém a barra oculta
 ```
+
+Botões de plugin entram entre qualidade e velocidade. A lista que vem da
+tradução do formato antigo (os nomes `play`, `time`, `settings`…) ainda acende
+o PiP e os botões dos plugins ativos, que aquele formato não conhecia e que
+seguiram os próprios interruptores — `pip: false` e `enableLikes: false`
+continuam valendo. Recursos indisponíveis, PiP desligado, controles visuais em
+modo áudio e saltos sem DVR continuam filtrados.
 
 Em lives, com ou sem DVR, a seleção de velocidade fica oculta por padrão em
 todas as skins. Para habilitá-la, inclua `playback_rate` na lista explícita de

@@ -36,6 +36,10 @@ de passá-la como `undefined` explicitamente dentro de um objeto.
 `debug=1` liga logs detalhados e `debug=0` os silencia; também são aceitos
 `silent`, `error`, `warn`, `info` e `debug`.
 
+`controls=` diz **quais** controles aparecem, na fileira fixa do player. Os
+nomes do formato antigo (`play`, `time`, `settings`…) são aceitos e traduzidos
+como na página do embed. Um nome desconhecido é ignorado, com aviso no console.
+
 Nas versões com AutoPiP, `autoPipViewport=1|0` e `autoPipBlur=1|0` controlam
 separadamente miniplayer ao rolar e PiP nativo ao perder foco. Ambos são opt-in;
 o construtor vence esses valores. Os parâmetros são reconhecidos no embed, mas
