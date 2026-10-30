@@ -17,6 +17,20 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.30] — 2026-10-30
+
+BUG/MINOR
+
+### Fixed
+
+- BUG/MINOR — Em live com anúncios costurados pelo servidor (DAI), o rótulo
+  de CDN da telemetria apontava a CDN ativa do player, que ali é só a
+  reserva: o manifesto costurado traz os segmentos pela URL do host escolhido
+  no anúncio, e 87% do tráfego de uma live grande estava rotulado como a
+  origem de reserva. O rótulo agora segue o host que entrega os segmentos —
+  a costura sai como `Akamai_DAI`, a reserva mantém o próprio nome e fora do
+  DAI nada muda.
+
 ## [1.1.29] — 2026-10-29
 
 BUG/MEDIUM
