@@ -17,6 +17,24 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.31] — 2026-11-05
+
+BUG/MINOR
+
+### Fixed
+
+- BUG/MINOR — Na skin samba, caixa estreita ficava sem controle de volume: a
+  fileira de larguras menores herdou a composição do celular do player de
+  produção, que não traz mudo nem volume. Eles voltam à fileira estreita, o
+  tratamento compacto que era da faixa de 360px passa a valer abaixo de 480px
+  para tudo caber (abaixo de 360px o slider sai, como no celular do
+  original), e o contador de tempo volta para dentro da fileira, na posição
+  do player anterior. O tempo sai para a linha acima da barra apenas na
+  fileira pedida explicitamente pelo integrador (`?controls=`,
+  `setControls`), que não acompanha a faixa da caixa e não caberia com ele
+  dentro — o limiar dessa exceção sobe de 480px para 600px de caixa, largura
+  em que a fileira explícita já transbordava mesmo antes deste conserto.
+
 ## [1.1.30] — 2026-10-30
 
 BUG/MINOR
