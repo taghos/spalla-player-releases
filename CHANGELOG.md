@@ -17,6 +17,22 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.1.33] — 2026-11-05
+
+MEDIUM
+
+### Added
+
+- MEDIUM — Em rede intermediária, a qualidade automática oscilava entre
+  resoluções sem parar: os limiares de subir e de descer eram o mesmo valor,
+  e a estimativa de banda rondando a borda de uma variante invertia a
+  escolha a cada intervalo de troca — cada inversão engasgava a imagem com o
+  buffer curto. Subir agora exige folga de 15% de banda sobre a variante
+  nova e 20 segundos desde a última queda; descer segue livre, porque fome
+  de buffer não espera. Custo assumido: com banda entre o bitrate do topo e
+  15% acima dele, a qualidade fica um degrau abaixo por estabilidade. Para
+  ignorar a regra, fixe a qualidade pela API (`setVideoQuality`).
+
 ## [1.1.32] — 2026-11-05
 
 MINOR
