@@ -300,7 +300,7 @@ tratar os dois casos separadamente no seu código.
 | Método                                  | O que faz                                             | Exemplo / retorno                                        |
 | --------------------------------------- | ----------------------------------------------------- | -------------------------------------------------------- |
 | `getVideoQualities()`                   | Lista as qualidades de vídeo disponíveis              | `player.getVideoQualities()` → `[{ height: 1080, ... }]` |
-| `setVideoQuality(altura)`               | Fixa a qualidade por altura, ou libera o ABR com `'auto'`. Se a conexão não der conta e o vídeo travar, a qualidade fixa volta para o automático sozinha | `player.setVideoQuality(720);`                          |
+| `setVideoQuality(altura)`               | Fixa a qualidade por altura, ou libera o ABR com `'auto'`. Na automática, subir de resolução exige 15% de folga de banda e 20s desde a última queda (ver [solução de problemas](09-solucao-de-problemas.md#a-qualidade-automática-oscila-entre-resoluções)). Se a conexão não der conta e o vídeo travar, a qualidade fixa volta para o automático sozinha | `player.setVideoQuality(720);`                          |
 | `limitQuality(bool)`                    | Restringe a qualidade automática a um teto            | `player.limitQuality(true);`                             |
 | `getAudioTracks()`                      | Lista as faixas de áudio disponíveis                  | `player.getAudioTracks()` → `[{ language: 'pt', ... }]`  |
 | `setAudioTrack(idioma, papel)`          | Troca a faixa de áudio ativa                          | `player.setAudioTrack('en');`                            |

@@ -54,6 +54,26 @@ Se você precisa mesmo começar com som, isso só é possível em resposta diret
 a uma interação do usuário (por exemplo, um clique num botão "assistir"), e
 mesmo assim alguns navegadores podem recusar.
 
+## A qualidade automática oscila entre resoluções
+
+**Sintoma**: com `autoplay` ligado em uma conexão intermediária (por exemplo,
+4G), a resolução fica trocando — 1080p cai para 720p e volta — e cada troca
+pode engasgar a imagem quando o buffer está curto.
+
+**Causa**: o ajuste automático segue a banda medida. Sem uma trava, a
+estimativa de banda rondando a fronteira entre duas resoluções invertia a
+escolha a cada intervalo de troca do motor.
+
+**Regra**: subir de resolução exige 15% de folga de banda sobre a resolução
+nova e 20 segundos desde a última queda; descer não tem espera, porque quando
+a banda não sustenta a imagem, esperar só piora. Com isso, uma conexão cujo
+desempenho fica entre o bitrate da melhor resolução e 15% acima dele é servida
+na resolução imediatamente inferior, de propósito — estabilidade vale mais que
+a resolução marginal. Se o seu caso precisa da resolução máxima mesmo assim,
+fixe-a com `setVideoQuality` (veja a
+[referência da API](02-referencia-api.md#faixas)); se começar a travar, a
+qualidade fixa volta para o automático sozinha.
+
 ## Legendas do vídeo não aparecem
 
 Na próxima versão, vídeos com legendas SRT cadastradas na configuração também
