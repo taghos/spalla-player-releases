@@ -17,6 +17,26 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.2.2] — 2026-11-06
+
+BUG/MAJOR
+
+### Fixed
+
+- BUG/MAJOR — Transmissões ao vivo deixavam de usar a entrega entre
+  espectadores e voltavam 100% à origem: o ciclo de atualização de estado
+  (a cada 5 segundos) reenvia a configuração inteira mesmo sem mudança, e a
+  reconfiguração reiniciava o contador da partida do motor de entrega, que
+  precisa de dez mídias servidas pela rede antes de engajar a distribuição.
+  Sob o ciclo, a partida nunca terminava: o motor ficava desligado para
+  sempre e deixava até de se anunciar para formar os grupos de espectadores —
+  numa transmissão de grande audiência, as sessões com entrega ativa caíram
+  de quase metade para menos de 2%. O defeito entrou na 1.1.32 com a afinação
+  da partida em vídeo sob demanda e afetou as versões até a 1.2.1; agora a
+  partida só é reiniciada quando o conteúdo troca entre ao vivo e vídeo sob
+  demanda. A reprodução nunca foi afetada — o espectador não via nada; o
+  custo era da origem.
+
 ## [1.2.1] — 2026-11-06
 
 MINOR
