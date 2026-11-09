@@ -17,6 +17,19 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.2.4] — 2026-11-09
+
+BUG/MINOR
+
+### Fixed
+
+- BUG/MINOR — O percentual assistido (`playedPercent`) das mensagens saía como
+  fração completa, com todas as casas decimais; o player anterior arredondava
+  a duas casas e chegava a 1 no fim do conteúdo, onde a fração completa sai
+  0.99999 — quem compara com 1 para marcar o conteúdo assistido não fechava
+  a conta. Agora `stats`, `load` e `progress` mandam o percentual arredondado
+  a duas casas decimais, como lá.
+
 ## [1.2.3] — 2026-11-09
 
 BUG/MINOR
