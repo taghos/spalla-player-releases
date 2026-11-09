@@ -17,6 +17,19 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.2.6] — 2026-11-09
+
+MINOR
+
+### Changed
+
+- MINOR — Ao vivo, a entrega entre espectadores engaja mais cedo: a espera
+  inicial cai de cerca de 100s para 40s de reprodução, então sessões curtas
+  deixam de ficar inteiramente na origem, e passa a cobrir mais do vídeo
+  recém-publicado. Quando ela insiste em falhar, a reprodução volta à origem
+  por um minuto e a entrega religa sozinha, em vez de seguir tentando sobre a
+  mesma rota ruim.
+
 ## [1.2.5] — 2026-11-09
 
 BUG/MINOR
