@@ -17,6 +17,19 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.2.3] — 2026-11-09
+
+BUG/MINOR
+
+### Fixed
+
+- BUG/MINOR — O evento `progress` das mensagens para quem embute o player por
+  iframe saía sem os campos `played`, `playedIntervals` e `playedPercent`, que
+  o player anterior enviava em cada notificação de progresso; quem acompanha
+  o percentual assistido por esse evento não tinha de onde ler o valor — os
+  campos só existiam no `stats` de 1 segundo e no `load`. Agora o `progress`
+  leva os mesmos intervalos de reprodução, na mesma escala.
+
 ## [1.2.2] — 2026-11-06
 
 BUG/MAJOR
