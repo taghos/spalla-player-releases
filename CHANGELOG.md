@@ -17,6 +17,22 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.2.5] — 2026-11-09
+
+BUG/MINOR
+
+### Fixed
+
+- BUG/MINOR — O evento `start` das mensagens saía sem os campos `played`,
+  `playedIntervals` e `playedPercent`, que o player anterior enviava; e o
+  evento `mediaview`, postado a cada mudança do percentual assistido, deixou
+  de existir — quem acompanhava o percentual por esse evento nunca recebia
+  nada. Agora o `start` leva os mesmos intervalos dos demais eventos e o
+  `mediaview` volta a sair a cada mudança do percentual (uma única vez em
+  transmissão ao vivo, onde não há duração). Junto, o evento `error` volta a
+  levar a mensagem também no campo `message`, que alguns erros do player
+  anterior usavam sozinhos.
+
 ## [1.2.4] — 2026-11-09
 
 BUG/MINOR
