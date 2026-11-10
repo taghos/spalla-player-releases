@@ -17,6 +17,19 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.2.7] — 2026-11-10
+
+MINOR
+
+### Changed
+
+- MINOR — Ao vivo, a entrega entre espectadores aproveita melhor o vídeo que
+  outros espectadores já têm em mãos: o que está sendo baixado por um deles
+  agora é anunciado ao grupo, e os demais esperam essa cópia em vez de cada
+  um buscar a própria na origem; a busca antecipada também cobre 60s a mais
+  de vídeo, dando tempo para a cópia circular antes de cada espectador
+  precisar dela.
+
 ## [1.2.6] — 2026-11-09
 
 MINOR
