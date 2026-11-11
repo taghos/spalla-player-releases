@@ -17,6 +17,17 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.2.8] — 2026-11-11
+
+MINOR
+
+### Changed
+
+- MINOR — Em live com anúncios costurados pelo servidor (DAI), a telemetria
+  passa a rotular também a entrega pela origem própria da Spalla
+  (`Spalla_DAI`), além do host Akamai já coberto; a reserva segue com o
+  próprio nome.
+
 ## [1.2.7] — 2026-11-10
 
 MINOR
