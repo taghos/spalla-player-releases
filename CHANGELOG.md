@@ -17,6 +17,23 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.2.9] — 2026-11-12
+
+BUG/MAJOR
+
+### Fixed
+
+- BUG/MAJOR — Em iPhone com iOS anterior a 17.1 — incluindo o 16.7, o mais
+  novo que o iPhone X aceita — o player novo não tocava nada: ao vivo ficava
+  no carregamento com o selo "ao vivo" e nenhum aviso, e o vídeo sob demanda
+  falhava igual. Nesses aparelhos o navegador expõe o MediaSource sem
+  implementá-lo, e a reprodução sai pelo caminho nativo do sistema, que busca
+  o manifesto por conta própria — sem a credencial da mídia que o player
+  anexa a cada requisição do outro caminho. A origem recusava esse pedido e a
+  reprodução morria antes do primeiro quadro, repetindo a tentativa algumas
+  vezes antes de falhar. Agora a credencial viaja na própria URL entregue ao
+  aparelho quando o caminho é o nativo, como o player anterior fazia.
+
 ## [1.2.8] — 2026-11-11
 
 MINOR
