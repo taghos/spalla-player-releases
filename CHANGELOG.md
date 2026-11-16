@@ -17,6 +17,38 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.2.10] — 2026-11-16
+
+BUG/MAJOR
+
+### Fixed
+
+- BUG/MAJOR — Ao vivo e sob demanda, a reprodução podia congelar para sempre
+  com o player dizendo "tocando": um pedido de segmento ficava pendente sem
+  resposta, sem erro e sem tempo limite, e nenhum caminho de recuperação
+  enxergava aquele estado — a imagem parava no meio da aula até o espectador
+  buscar outro ponto ou fechar. Dois consertos: quando o mesmo segmento
+  acumula falhas de transferência da entrega entre espectadores, a tentativa
+  seguinte dele vai direto à CDN em vez de disputar de novo a fila do peer;
+  e um vigia de inanição observa o relógio da mídia — parado com o buffer
+  vazio enquanto "tocando" — e manda a retomada leve abortar o pedido
+  pendente e refazer o streaming, sem recarregar a carga nem perder a
+  posição. Diagnóstico novo na telemetria para ler o episódio depois.
+
+- BUG/MINOR — Conteúdo com intervalo comercial configurado sem URL no console
+  acumulava um erro de anúncio a cada carga: o pedido partia para o SDK sem
+  a tag, que recusa de imediato (AdError 1013). Entrada de VAST, VMAP ou IMA
+  sem URL não é mais contada como publicidade nem pedida — o que não tem
+  tag não vira intervalo.
+
+- BUG/MINOR — O evento `firstplaying` não saía em parte das sessões que de
+  fato tocaram: a medida do tempo até o primeiro quadro, cravada pelas
+  estatísticas da engine na decodificação — que pode acontecer antes de
+  qualquer reprodução em partidas lentas — era tomada pelo marcador de
+  emissão, e o evento nunca era publicado. O marcador agora é próprio; a
+  medida continua preferindo a da engine. Funil de partida e contagem de
+  `initerror` voltam ao valor real.
+
 ## [1.2.9] — 2026-11-12
 
 BUG/MAJOR
