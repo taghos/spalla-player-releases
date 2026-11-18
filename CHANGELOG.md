@@ -17,6 +17,23 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.2.11] — 2026-11-18
+
+BUG/MINOR
+
+### Fixed
+
+- BUG/MINOR — Refinamento do desarme da inanição de mídia introduzido na
+  1.2.10, medido em produção: o episódio que a retomada leve não resolve
+  martelava a mesma ação a cada trinta segundos por horas — uma única aba
+  esquecida contou mais de dois mil disparos sem nenhuma retentativa na
+  escada. Agora a terceira ação do episódio engaja a escada de recuperação
+  completa (que troca de origem e tem orçamento e espera próprios), o episódio
+  encerra as ações após quatro tentativas e a escada esgotada não é mais
+  provocada. Junto, o diagnóstico do episódio volta a carregar a posição e o
+  buffer do momento, que chegavam vazios desde a 1.2.10, e passa a contar as
+  ações do episódio — é o que separa a retomada leve da escalada na leitura.
+
 ## [1.2.10] — 2026-11-16
 
 BUG/MAJOR
