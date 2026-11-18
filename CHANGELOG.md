@@ -17,6 +17,16 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.2.12] — 2026-11-18
+
+BUG/MINOR
+
+### Fixed
+
+- BUG/MINOR — O primeiro clique no botão de Libras mostrava "Tradução em Libras
+  indisponível" e só o segundo abria o avatar. Agora o primeiro clique espera o
+  avatar terminar de carregar e já o exibe.
+
 ## [1.2.11] — 2026-11-18
 
 BUG/MINOR
