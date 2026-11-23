@@ -17,6 +17,19 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.2.13] — 2026-11-23
+
+MINOR
+
+### Added
+
+- MINOR — A marca anti-pirataria respeita a configuração de conteúdo
+  `lm_vod_pp`: ligada, o overlay aparece desde o início da reprodução e troca
+  de posição a cada 60 segundos, em vez do ritmo padrão de 5. Sem `aid` do
+  integrador, a marca exibe o localizador da sessão — o recurso deixou de
+  exigir o identificador do cliente para aparecer. Fundo e texto ficam a 10%
+  de opacidade, discretos sobre o vídeo.
+
 ## [1.2.12] — 2026-11-18
 
 BUG/MINOR
