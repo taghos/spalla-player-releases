@@ -17,6 +17,18 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.2.14] — 2026-11-24
+
+MINOR
+
+### Added
+
+- MINOR — A requisição de autorização (`/cache/auth`) leva o localizador da
+  instância na query, em `loc=`: é o código que o espectador dita ao suporte,
+  o mesmo exibido na tela de erro e na marca anti-pirataria, e agora chega ao
+  backend junto do `uid` e do `aid` em cada autorização — inclusive na
+  segunda tentativa de playlist.
+
 ## [1.2.13] — 2026-11-23
 
 MINOR
