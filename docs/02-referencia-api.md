@@ -397,7 +397,7 @@ Nomes aceitos em `controls` (opção do construtor) e em `setControls(nomes)`:
 | `fullscreen` · `overflow_menu` · `content_title`   | Tela cheia, menu "mais" e título           |
 
 Mais os botões dos plugins ativos, quando existirem: `ai`, `audio_description`,
-`comments`, `libras`, `like`, `playlist`, `statistics`, `voice`. Um nome
+`comments`, `download`, `libras`, `like`, `playlist`, `statistics`, `voice`. Um nome
 desconhecido é ignorado, com aviso no console — não interrompe a montagem da
 barra.
 
@@ -456,6 +456,20 @@ principal, e anúncios configurados na própria peça não rodam.
   `isAdPlaying()` e `skipAd()` mantêm o contrato dos demais anúncios; pular
   respeita a permissão e o tempo configurados.
 
+### Offline
+
+| Método                | O que faz                                               | Exemplo / retorno                     |
+| --------------------- | ------------------------------------------------------- | ------------------------------------- |
+| `download()`          | Baixa o VOD carregado; resolve com o download concluído | `await player.download();`            |
+| `getDownload(id?)`    | Estado do download do conteúdo carregado (ou de `id`)   | `await player.getDownload()` → `null` |
+| `removeDownload(id?)` | Apaga a cópia, ou cancela o download em curso           | `await player.removeDownload();`      |
+| `abortDownload(id?)`  | Cancela o download em curso sem apagar cópia concluída  | `player.abortDownload();`             |
+
+Estáticos, para uma tela de downloads sem player na página:
+`SpallaPlayer.offline.isSupported()` · `download(id, opções)` · `list()` ·
+`get(id)` · `remove(id)` · `abort(id)` · `on(evento, fn)`. Ver
+[Assistir offline](#assistir-offline).
+
 ### Diagnóstico
 
 | Método                | O que faz                                                    | Exemplo / retorno                                  |
@@ -501,6 +515,10 @@ player.on("*", (event, metadata) => {
 - **Rede**: `segment` `networkfailure` `sessionauthorized` `configloaded`
 - **Interface**: `fullscreenchange` `controlsshown` `controlshidden`
 - **Publicidade e cast**: `adstarted` `adended` `aderror` `daifallback` `caststatechange`
+- **Offline**: `offlineprogress` `offlinecomplete` `offlineerror` `offlineremoved`
+
+Todo evento leva `offline`, verdadeiro quando a reprodução vem da cópia
+baixada; o `offlineerror` leva `errorCode` e `errorMessage`.
 
 O `aderror` traz `code` e `message` do erro de anúncio. O `daifallback` avisa
 que o intervalo comercial costurado ao vídeo não veio, ou veio e não carregou,
@@ -514,6 +532,103 @@ somente na telemetria como `erro_unknown`, sem `error` ou `initerror`,
 inclusive antes do primeiro quadro. Isso não corrige a falha interna nem
 garante continuidade da reprodução; se ocorrer durante `load()`, a Promise
 continua rejeitando.
+
+## Assistir offline
+
+Um VOD liberado pela Spalla pode ser baixado e tocado sem rede. A liberação é
+por conteúdo, na configuração do backend: `sp_player_offline_cache` permite o
+download e `sp_player_offline_ttl` define, em segundos, por quanto tempo a
+cópia vale — sete dias quando ausente. Lives não são baixadas; playlists, só
+item a item.
+
+O download acontece online, com a mesma autorização de uma reprodução comum. A
+cópia guarda o vídeo na maior qualidade, todos os áudios (no áudio
+multiplexado, só o do idioma preferido), todas as legendas, miniaturas,
+capítulos e as imagens de capa. Conteúdo com AES-128 é guardado já decifrado.
+
+```js
+// Com o conteúdo carregado
+await player.download(); // resolve com o download concluído
+await player.getDownload(); // ou getDownload(id); null sem cópia
+await player.removeDownload(); // apaga, ou cancela se ainda baixa
+player.abortDownload(); // cancela sem apagar cópia concluída
+
+// Sem player na página, para uma tela de downloads
+SpallaPlayer.offline.isSupported();
+await SpallaPlayer.offline.download("SEU_ID_AQUI", {
+  apiKey,
+  referrer,
+  aid,
+  language,
+});
+await SpallaPlayer.offline.list();
+await SpallaPlayer.offline.get("SEU_ID_AQUI");
+await SpallaPlayer.offline.remove("SEU_ID_AQUI");
+SpallaPlayer.offline.abort("SEU_ID_AQUI");
+const cancelar = SpallaPlayer.offline.on(
+  "progress",
+  ({ contentId, progress }) => {},
+);
+```
+
+`SpallaPlayer.offline.download()` aceita as mesmas `apiKey`, `referrer` e
+`aid` do construtor; `language` escolhe o áudio multiplexado e, ausente, segue
+o idioma do navegador. `on()` aceita `progress`, `complete`, `error` e
+`removed`.
+
+Cada download é descrito por `{ contentId, title, status, progress, size,
+duration, downloadedAt, expiresAt, thumbnail }`, com `status` em `queued`,
+`downloading` ou `downloaded` e as datas em epoch de milissegundos. Os
+downloads correm um de cada vez, na ordem em que foram pedidos; um download
+interrompido recomeça do zero. O mesmo conteúdo sendo baixado em outra aba
+recusa o segundo pedido.
+
+O player avisa por `offlineprogress` (`progress` entre 0 e 1),
+`offlinecomplete` (`size`, `expiresAt`), `offlineerror` (`code`, `message`) e
+`offlineremoved` (`reason`: `user`, `expired` ou `aborted`, este último para o
+download cancelado). Os eventos de uma instância cobrem o conteúdo carregado e
+os downloads que ela pediu; `SpallaPlayer.offline.on()` cobre todos.
+
+| Código                | Quando                                                                           |
+| --------------------- | -------------------------------------------------------------------------------- |
+| `OFFLINE_UNSUPPORTED` | Navegador sem armazenamento local, ou iPhone até o iOS 17.0                      |
+| `OFFLINE_NOT_ALLOWED` | Conteúdo não liberado, em processamento, live, playlist ou baixando em outra aba |
+| `OFFLINE_QUOTA`       | Sem espaço no aparelho para a cópia                                              |
+| `OFFLINE_ABORTED`     | O `download()` foi cancelado; não emite `offlineerror`                           |
+
+Com o conteúdo liberado, o botão `download` aparece na barra e faz o mesmo
+ciclo: baixar, cancelar, remover com confirmação.
+
+**A cópia vence a rede.** Um `load()` de conteúdo baixado toca do
+armazenamento local mesmo com o aparelho online, sem anúncios, P2P, troca de
+CDN nem Chromecast. `getStats().cdn` reporta `Offline`, e os recursos que
+dependem de serviço remoto (comentários, formulário de leads, e-commerce,
+Libras, logo, busca na transcrição, comandos de voz) não aparecem. Se a cópia
+falhar, a reprodução segue pela rede; sem rede nem cópia, vale a
+[recuperação automática](#recuperação-automática-de-rede) de sempre.
+`removeDownload()` na cópia que está tocando volta pela rede no mesmo ponto.
+
+A validade conta pelo maior relógio já visto pelo navegador: adiantar ou
+atrasar o relógio do aparelho não estende a cópia, e um relógio que volta mais
+de um dia a invalida. Uma cópia vencida é apagada na próxima consulta. A
+telemetria gerada sem rede fica guardada no navegador (até 500 lotes, 10 MB e
+sete dias) e é enviada quando a conexão volta.
+
+Os dados ficam no armazenamento do navegador, que pode apagá-los sob pressão
+de espaço ou, no Safari, depois de dias sem visita ao site; o player pede
+armazenamento persistente, mas a decisão é do navegador. Dentro de iframe de
+outra origem o armazenamento é separado por site: a cópia baixada num site não
+aparece em outro.
+
+### Abrir a página sem rede
+
+O player toca a cópia, mas não abre sozinho a página que o contém: sem rede, o
+site do integrador precisa abrir offline — em geral com um service worker
+próprio que guarde a página, o `spalla-player.min.js` e, ao lado dele,
+`wasm_exec.js` e `spalla-player.transmuxer-worker.js`, que alguns ambientes
+pedem em runtime. A página de embed hospedada pela Spalla já traz o próprio
+service worker; quem a usa num iframe só precisa que a página hospedeira
+também abra offline.
 
 ## Chromecast
 

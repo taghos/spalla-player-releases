@@ -7,7 +7,7 @@ for a primeira vez.
 1. [Início rápido](01-inicio-rapido.md) — instalar, montar o player, carregar
    um conteúdo.
 2. [Referência da API](02-referencia-api.md) — construtor, opções, métodos,
-   eventos, propriedades.
+   eventos, propriedades, download e reprodução offline.
 3. [Parâmetros de URL](03-parametros-de-url.md) — configurar o player pela
    query string, quando e como habilitar.
 4. [Skins personalizadas](04-skins-personalizadas.md) — mudar a aparência e o

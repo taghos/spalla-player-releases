@@ -89,6 +89,21 @@ construtor, independente do que `shouldMount()` decidiria sozinho:
 new SpallaPlayer("#player", { features: { "meu-plugin": false } });
 ```
 
+## Cópia baixada
+
+Um VOD baixado toca do armazenamento local, inclusive com o aparelho online —
+veja [Assistir offline](02-referencia-api.md#assistir-offline). Nesse caso a
+configuração traz `config.offline.ativo` verdadeiro, sem sessão autenticada
+nem CDN. Um plugin que só funciona falando com um serviço remoto declara:
+
+```js
+static requiresNetwork = true;
+```
+
+e não monta na cópia local, nem forçado por `features`. Se só uma parte do
+plugin depende de rede, deixe o campo em `false` e decida no `shouldMount` ou
+no `mount()` pelo `config.offline?.ativo`.
+
 ## Dependências entre plugins
 
 Um plugin pode consultar outro já montado via `this.player.getPlugin(nome)` —

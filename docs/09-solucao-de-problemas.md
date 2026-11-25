@@ -133,6 +133,27 @@ reserva para esse caso — sem `Worker` disponível ou com CSP que impeça
 `blob:`, o player cai automaticamente para o thread principal, sem quebrar,
 apenas com menos paralelismo.
 
+## A cópia baixada não aparece ou sumiu
+
+**Sintoma**: `getDownload()` devolve `null` e o `load()` volta a buscar pela
+rede, ou, sem rede, a página nem abre.
+
+**Causas**, da mais comum para a menos comum:
+
+- A cópia venceu. `expiresAt` marca o fim da validade, e um relógio do
+  aparelho que volta mais de um dia também a invalida.
+- O navegador apagou o armazenamento: sob pressão de espaço, ou, no Safari,
+  depois de dias sem visita ao site.
+- A cópia foi baixada em outro site. Dentro de iframe de outra origem o
+  armazenamento é separado pelo site que hospeda o iframe.
+- A página que contém o player não abre offline. O player não guarda a página
+  do integrador; veja
+  [Abrir a página sem rede](02-referencia-api.md#abrir-a-página-sem-rede).
+
+**Diagnóstico**: `await SpallaPlayer.offline.list()` mostra o que está
+guardado naquela origem, com `status` e `expiresAt`, e `getStats().cdn`
+reporta `Offline` quando a reprodução vem da cópia.
+
 ## O aparelho de TV mostra a tela errada / não navega com o controle remoto
 
 Veja os guias específicos: [webOS](06-tv-webos.md) e [Tizen](07-tv-tizen.md).
