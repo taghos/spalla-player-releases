@@ -17,6 +17,29 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.3.1] — 2026-11-25
+
+MINOR
+
+### Added
+
+- MINOR — VOD pode ser baixado e assistido sem rede. O download passa pela
+  autorização de sempre e guarda o vídeo na maior qualidade, todos os áudios,
+  legendas, miniaturas, capítulos e capas.
+  Um `load()` de conteúdo baixado toca da cópia mesmo online — sem anúncios,
+  troca de CDN nem cast — e volta pela rede se a cópia falhar. Eventos
+  `offlineprogress`, `offlinecomplete`,`offlineerror` e `offlineremoved`;
+  erros `OFFLINE_UNSUPPORTED`,`OFFLINE_NOT_ALLOWED`, `OFFLINE_QUOTA` e
+  `OFFLINE_ABORTED`;
+  botão`download` na barra quando o conteúdo é liberado. Todo evento público passa
+  a levar `offline`, e `getStats().cdn` reporta `Offline` na cópia.
+- MINOR — A telemetria gerada sem rede fica guardada no navegador (até 500
+  lotes, 10 MB e sete dias) e é enviada quando a conexão volta.
+- MINOR — A página de embed traz um service worker, publicado em
+  `/player/sw.js`, para abrir sem rede quando há cópia baixada. Ele busca
+  sempre a rede primeiro e só é registrado onde o conteúdo libera download ou
+  já existe cópia; `sw-desligar.js`, publicado no lugar do `sw.js`, o desliga.
+
 ## [1.3.0] — 2026-11-24
 
 MINOR
