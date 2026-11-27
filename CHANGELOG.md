@@ -17,6 +17,87 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+## [1.3.2] — 2026-11-27
+
+BUG/MINOR
+
+### Fixed
+
+- BUG/MINOR — Live encerrada podia entrar numa sequência de recomeços que
+  ninguém consegue contornar. Duas situações: com a transmissão encerrada e o
+  acervo servido pelo mesmo manifesto, o fim da reprodução era reemitido a
+  cada checagem de status; e quando a origem passava a recusar o manifesto
+  (404) depois do fim, a recuperação automática recarregava a carga em
+  rodadas, cada uma tocando os últimos segundos e acabando de novo, até a
+  página fechar. O estado da transmissão agora fecha no primeiro aviso de
+  fim, uma retomada anunciada depois do fim não recarrega, e mídia já
+  acabada com a origem recusando é descarregada uma única vez, sem escada de
+  recuperação — o erro continua saindo em eventos e telemetria.
+
+### Added
+
+- MINOR — Telemetria ganha `recarga_midia`: a recarga que a retomada de uma
+  live faz fora do caminho de carga normal não cria nova sessão de medição e
+  até agora não deixava rastro identificável — só um play no segundo zero
+  seguido de salto para a borda viva. O evento sai com o motivo
+  (`retomada_live`) e a posição da mídia antes da recarga.
+
+## [1.3.1] — 2026-11-25
+
+MINOR
+
+### Added
+
+- MINOR — VOD pode ser baixado e assistido sem rede. O download passa pela
+  autorização de sempre e guarda o vídeo na maior qualidade, todos os áudios,
+  legendas, miniaturas, capítulos e capas.
+  Um `load()` de conteúdo baixado toca da cópia mesmo online — sem anúncios,
+  troca de CDN nem cast — e volta pela rede se a cópia falhar. Eventos
+  `offlineprogress`, `offlinecomplete`,`offlineerror` e `offlineremoved`;
+  erros `OFFLINE_UNSUPPORTED`,`OFFLINE_NOT_ALLOWED`, `OFFLINE_QUOTA` e
+  `OFFLINE_ABORTED`;
+  botão`download` na barra quando o conteúdo é liberado. Todo evento público passa
+  a levar `offline`, e `getStats().cdn` reporta `Offline` na cópia.
+- MINOR — A telemetria gerada sem rede fica guardada no navegador (até 500
+  lotes, 10 MB e sete dias) e é enviada quando a conexão volta.
+- MINOR — A página de embed traz um service worker, publicado em
+  `/player/sw.js`, para abrir sem rede quando há cópia baixada. Ele busca
+  sempre a rede primeiro e só é registrado onde o conteúdo libera download ou
+  já existe cópia; `sw-desligar.js`, publicado no lugar do `sw.js`, o desliga.
+
+## [1.3.0] — 2026-11-24
+
+MINOR
+
+### Added
+
+- MINOR — Otimizações internas de performance na telemetria.
+
+## [1.2.14] — 2026-11-24
+
+MINOR
+
+### Added
+
+- MINOR — A requisição de autorização (`/cache/auth`) leva o localizador da
+  instância na query, em `loc=`: é o código que o espectador dita ao suporte,
+  o mesmo exibido na tela de erro e na marca anti-pirataria, e agora chega ao
+  backend junto do `uid` e do `aid` em cada autorização — inclusive na
+  segunda tentativa de playlist.
+
+## [1.2.13] — 2026-11-23
+
+MINOR
+
+### Added
+
+- MINOR — A marca anti-pirataria respeita a configuração de conteúdo
+  `lm_vod_pp`: ligada, o overlay aparece desde o início da reprodução e troca
+  de posição a cada 60 segundos, em vez do ritmo padrão de 5. Sem `aid` do
+  integrador, a marca exibe o localizador da sessão — o recurso deixou de
+  exigir o identificador do cliente para aparecer. Fundo e texto ficam a 10%
+  de opacidade, discretos sobre o vídeo.
+
 ## [1.2.12] — 2026-11-18
 
 BUG/MINOR
