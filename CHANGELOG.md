@@ -17,6 +17,34 @@ baixo risco. Versão sem correção abre com o risco da maior mudança (`MAJOR`,
 `MEDIUM`, `MINOR`) ou com o tipo predominante (`DOC`, `BUILD`, `CLEANUP`,
 `OPTIM`, `REORG`). Cada entrada repete a própria classificação.
 
+<<<<<<< Updated upstream
+=======
+## [1.3.2] — 2026-11-27
+
+BUG/MINOR
+
+### Fixed
+
+- BUG/MINOR — Live encerrada podia entrar numa sequência de recomeços que
+  ninguém consegue contornar. Duas situações: com a transmissão encerrada e o
+  acervo servido pelo mesmo manifesto, o fim da reprodução era reemitido a
+  cada checagem de status; e quando a origem passava a recusar o manifesto
+  (404) depois do fim, a recuperação automática recarregava a carga em
+  rodadas, cada uma tocando os últimos segundos e acabando de novo, até a
+  página fechar. O estado da transmissão agora fecha no primeiro aviso de
+  fim, uma retomada anunciada depois do fim não recarrega, e mídia já
+  acabada com a origem recusando é descarregada uma única vez, sem escada de
+  recuperação — o erro continua saindo em eventos e telemetria.
+
+### Added
+
+- MINOR — Telemetria ganha `recarga_midia`: a recarga que a retomada de uma
+  live faz fora do caminho de carga normal não cria nova sessão de medição e
+  até agora não deixava rastro identificável — só um play no segundo zero
+  seguido de salto para a borda viva. O evento sai com o motivo
+  (`retomada_live`) e a posição da mídia antes da recarga.
+
+>>>>>>> Stashed changes
 ## [1.3.1] — 2026-11-25
 
 MINOR
